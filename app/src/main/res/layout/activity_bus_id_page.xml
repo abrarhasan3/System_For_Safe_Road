@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".bus_id_page">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please Enter Your Trip ID"
+        android:layout_above="@+id/busIdEdit"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="30dp"
+        />
+
     <EditText
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
@@ -16,4 +27,13 @@
         android:hint="ID"
         tools:layout_editor_absoluteX="100dp"
         tools:layout_editor_absoluteY="305dp" />
+
+    <Button
+        android:id="@+id/confirm_button1"
+        android:layout_below="@+id/busIdEdit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm" />
 </RelativeLayout>
