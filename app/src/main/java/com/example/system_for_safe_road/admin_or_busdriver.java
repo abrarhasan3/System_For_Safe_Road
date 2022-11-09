@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 public class admin_or_busdriver extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +20,9 @@ public class admin_or_busdriver extends AppCompatActivity {
         layout1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(admin_or_busdriver.this,"HI",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(admin_or_busdriver.this,adminPannel.class);
+                startActivity(intent);
+                finish();
             }
         });
         layout2.setOnClickListener(new View.OnClickListener() {
@@ -31,7 +34,4 @@ public class admin_or_busdriver extends AppCompatActivity {
             }
         });
     }
-
-
-
 }
