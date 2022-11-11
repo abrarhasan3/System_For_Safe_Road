@@ -24,7 +24,8 @@ public class SplashActivity extends AppCompatActivity {
                     ex.printStackTrace();
                 }
                 finally {
-                    Intent intent = new Intent(SplashActivity.this, admin_or_busdriver.class);
+                    //Intent intent = new Intent(SplashActivity.this, admin_or_busdriver.class);
+                    Intent intent = new Intent(SplashActivity.this, AdminFlagDetailsActivity .class);
                     startActivity(intent);
                     finish();
                 }
