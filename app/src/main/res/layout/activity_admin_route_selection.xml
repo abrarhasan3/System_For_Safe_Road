@@ -47,6 +47,26 @@
             android:background="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/routeID_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        app:endIconMode="clear_text"
+        app:helperText="Required*"
+        app:helperTextTextColor="@color/red"
+        android:hint="Route ID"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/routeID_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/route_accept"
         android:layout_width="150dp"

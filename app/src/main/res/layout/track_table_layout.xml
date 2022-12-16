@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1,2,3,4">
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/address_id"
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:layout_column="1"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/predicted_time_id"
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:layout_column="1"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/arrival_time_id"
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:layout_column="1"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/late_not"
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:layout_column="1"
+            android:gravity="center"
+            />
+
+    </TableRow>
+</TableLayout>
