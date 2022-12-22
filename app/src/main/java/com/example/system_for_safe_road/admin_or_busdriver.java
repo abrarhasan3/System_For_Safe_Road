@@ -19,7 +19,7 @@ public class admin_or_busdriver extends AppCompatActivity {
         layout1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(admin_or_busdriver.this,admin_home_temporary.class);
+                Intent intent = new Intent(admin_or_busdriver.this,adminPannel.class);
                 startActivity(intent);
                 finish();
                 //Toast.makeText(admin_or_busdriver.this,"HI",Toast.LENGTH_SHORT).show();
