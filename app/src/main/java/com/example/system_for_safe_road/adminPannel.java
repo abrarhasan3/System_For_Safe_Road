@@ -29,6 +29,8 @@ public class adminPannel extends AppCompatActivity {
         preset();
         preset1();
         preset2();
+        preset3();
+
 
         Button button = findViewById(R.id.confirm_button2);
 
@@ -42,7 +44,6 @@ public class adminPannel extends AppCompatActivity {
                 else
                 {
                     if(index == 1)
-
                     {
                         Intent intent = new Intent(adminPannel.this, AdminRouteSelectionActivity.class);
                         startActivity(intent);
@@ -59,11 +60,18 @@ public class adminPannel extends AppCompatActivity {
                         Intent intent = new Intent(adminPannel.this, bus_id_for_tracking.class);
                         startActivity(intent);
                     }
+                    else if(index == 4)
+                    {
+                        Intent intent = new Intent(adminPannel.this, All_Routes_Activity.class);
+                        startActivity(intent);
+                    }
                 }
 
             }
         });
     }
+
+
 
     private void preset() {
         LinearLayout l=findViewById(R.id.routeSelect);
@@ -141,6 +149,13 @@ public class adminPannel extends AppCompatActivity {
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 2;
                         }
+                        else if(index==4)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.viewAllRoute);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 2;
+                        }
                     }
 
                 }
@@ -181,6 +196,62 @@ public class adminPannel extends AppCompatActivity {
                             LinearLayout l1=findViewById(R.id.addNew);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 3;
+                        }
+                        else if(index==4)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.viewAllRoute);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 3;
+                        }
+                    }
+
+                }
+            }
+        });
+    }
+
+    private void preset3() {
+        LinearLayout l=findViewById(R.id.viewAllRoute);
+        l.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(selected==0) {
+                    l.setBackgroundColor(Color.parseColor("#05a85c"));
+                    Button button = findViewById(R.id.confirm_button2);
+                    button.setVisibility(View.VISIBLE);
+                    selected=1;
+                    index=4;
+                }
+                else{
+                    if(index==4) {
+                        l.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        Button button = findViewById(R.id.confirm_button2);
+                        button.setVisibility(View.GONE);
+                        selected = 0;
+                        index = -1;
+                    }
+                    else{
+                        if(index==1)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.routeSelect);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 4;
+                        }
+                        else if(index==2)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.addNew);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 4;
+                        }
+                        else if(index == 3)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.track);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 4;
                         }
                     }
 

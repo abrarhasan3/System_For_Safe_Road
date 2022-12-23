@@ -226,7 +226,6 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                 tempM = mMap.addMarker(new MarkerOptions().position(tempL).title(busid+"-"+time).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                 databaseReference2.child("bus_locations").child(busid).child("time").setValue(time);
                 Toast.makeText(UserRoute_GPSActivity.this, "n"+tempL1, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(UserRoute_GPSActivity.this, "a"+tempL1, Toast.LENGTH_SHORT).show();
                 hashMap.put(tempL1, tempL);
                 col=1;
                 getRoute(tempL1, tempL);

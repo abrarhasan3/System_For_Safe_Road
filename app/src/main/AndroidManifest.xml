@@ -17,6 +17,20 @@
         android:theme="@style/Theme.System_For_Safe_Road"
         tools:targetApi="31">
         <activity
+            android:name=".Track_Edit_Route_Admin"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".All_Routes_Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".adminPannel"
             android:exported="false">
             <meta-data
@@ -66,7 +80,6 @@
         <activity
             android:name=".Admin_Add_Trip"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -100,7 +113,6 @@
             android:name=".AdminRouteSelectionActivity"
             android:exported="true"
             android:parentActivityName=".admin_or_busdriver">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -116,11 +128,6 @@
             android:name=".bus_id_page"
             android:exported="true"
             android:parentActivityName=".admin_or_busdriver">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -128,6 +135,11 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"

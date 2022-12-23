@@ -22,10 +22,10 @@ import java.util.ArrayList;
 
 public class bus_id_for_tracking extends AppCompatActivity {
     ArrayList<String> stringList = new ArrayList<>();
+    ArrayAdapter<String> arrayAdapter;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference().child("users");
     AutoCompleteTextView autoCompleteTextView;
-    ArrayAdapter<String> arrayAdapter;
     Button showBtn;
     String busIdString;
 

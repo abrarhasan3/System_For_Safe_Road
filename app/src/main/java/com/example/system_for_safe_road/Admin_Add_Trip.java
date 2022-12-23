@@ -126,7 +126,7 @@ public class Admin_Add_Trip extends AppCompatActivity {
                     databaseReference.child("trips").child("routeID").child(bus_id).setValue(routeNum);
                     databaseReference.child("trips").child("startTime").child(bus_id).setValue(s);
                     Toast.makeText(Admin_Add_Trip.this, "Trip added", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Admin_Add_Trip.this, admin_home_temporary.class);
+                    Intent intent = new Intent(Admin_Add_Trip.this, adminPannel.class);
                     startActivity(intent);
                 }
             }
