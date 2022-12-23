@@ -66,6 +66,7 @@
         <activity
             android:name=".Admin_Add_Trip"
             android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -99,6 +100,7 @@
             android:name=".AdminRouteSelectionActivity"
             android:exported="true"
             android:parentActivityName=".admin_or_busdriver">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -112,8 +114,13 @@
         </activity>
         <activity
             android:name=".bus_id_page"
-            android:exported="false"
+            android:exported="true"
             android:parentActivityName=".admin_or_busdriver">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -121,11 +128,6 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"

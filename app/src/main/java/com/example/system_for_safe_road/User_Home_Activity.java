@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 public class User_Home_Activity extends AppCompatActivity {
 
     LinearLayout layout;
-    String busid, s2;
+    String busid, s2, startTime, routeId;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference().child("users");
     @Override
@@ -29,34 +29,23 @@ public class User_Home_Activity extends AppCompatActivity {
 
         layout=findViewById(R.id.start_journey);
         busid = getIntent().getStringExtra("busid");
+        routeId=getIntent().getStringExtra("route");
+        startTime=getIntent().getStringExtra("startTime");
 
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layout.setBackgroundResource(R.color.mybeigeblue2);
+                layout.setBackgroundResource(R.color.mybeigeblue2);/*
                 String ts = "Please wait";
                 Toast toast = Toast.makeText(getApplicationContext(), ts, Toast.LENGTH_SHORT);
                 View toastView = toast.getView();
                 toastView.setBackgroundResource(R.color.mybeigeblue2);
-                toast.show();
-                DatabaseReference databaseReference1 = databaseReference.child("trips").child(busid);
-                databaseReference1.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        s2 = snapshot.getValue().toString();
-                        Intent intent = new Intent(User_Home_Activity.this, UserRoute_GPSActivity.class);
-                        Toast.makeText(User_Home_Activity.this, ""+s2, Toast.LENGTH_SHORT).show();
-                        intent.putExtra("route", s2);
-                        intent.putExtra("busid", busid);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
+                toast.show();*/
+                Intent intent = new Intent(User_Home_Activity.this, UserRoute_GPSActivity.class);
+                intent.putExtra("route", routeId);
+                intent.putExtra("busid", busid);
+                intent.putExtra("startTime", startTime);
+                startActivity(intent);
             }
         });
 

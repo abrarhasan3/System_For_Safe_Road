@@ -20,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.system_for_safe_road.databinding.ActivityBusTrackingMapBinding;
 import com.google.android.gms.maps.model.Polyline;
@@ -48,6 +49,7 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
     HashMap<LatLng, LatLng> flagHashMap = new HashMap<>();
     Button refreshBtn;
     LatLng sourceLatLng, desLatLng;
+    Marker tempM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,20 +70,11 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
 
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        databaseReference1 = databaseReference.child("trips").child(busIdString);
+        databaseReference1 = databaseReference.child("trips").child("routeID").child(busIdString);
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot1) {
@@ -153,7 +146,10 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         LatLng busLatLng = new LatLng((Double) snapshot.child("latitude").getValue(), (Double) snapshot.child("longitude").getValue());
-                        mMap.addMarker(new MarkerOptions().position(busLatLng).title(busIdString).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+                        if(tempM!=null){
+                            tempM.remove();
+                        }
+                        tempM = mMap.addMarker(new MarkerOptions().position(busLatLng).title(busIdString).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(busLatLng, 15));
                         for(LatLng latLng : flagHashMap.keySet()){
                             Location start = new Location("A");

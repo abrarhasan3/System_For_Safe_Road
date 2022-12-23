@@ -56,19 +56,21 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
     private ActivityUserRouteGpsactivityBinding binding;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference2 =  firebaseDatabase.getReference().child("users"), databaseReference;
-    int i=0, count;
+    int i=0, count, j=0;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.purple_700};
     private static final int[] COLORS1 = new int[]{R.color.mybeigeblue};
     android.location.LocationListener locationListener;
     private LocationManager locationManager;
     HashMap<LatLng, LatLng> hashMap = new HashMap<>();
-    private final long MIN_TIME =1000;
-    private final long MIN_DIST = 50;//5 for testing
+    HashMap<LatLng, String> startTimeHashMap = new HashMap<>();
+    private final long MIN_TIME =100;
+    private final long MIN_DIST = 5;//5 for testing
     Marker sourceM, destinationM, tempM, tempM1;
     LatLng sourceL, destinationL, tempL, tempL1;
     int siz, col=0;
-    String s, busid;
+    String s, busid, startTime, subTime;
+    int hour , minute;
 
 
     @Override
@@ -86,63 +88,22 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
         polylines = new ArrayList<>();
         s = getIntent().getStringExtra("route");
         busid = getIntent().getStringExtra("busid");
-
-        databaseReference = databaseReference2.child("routes").child(s);
-
-        DatabaseReference databaseReference1= databaseReference.child("Flag");
-        databaseReference1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot1) {
-
-                        double latitude = (double) snapshot1.child("source").child("latitude").getValue();
-                        double longitude = (double) snapshot1.child("source").child("longitude").getValue();
-                        sourceL = new LatLng(latitude, longitude);
-                        tempL1 = sourceL;
-                        mMap.addMarker(new MarkerOptions().position(sourceL).title("source"));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sourceL, 10));
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
-                count = (int) snapshot.getChildrenCount();
-                while(i<count){
-                    double latiude = (double) snapshot.child("Flag"+i).child("key").child("latitude").getValue();
-                    double longitude = (double) snapshot.child("Flag"+i).child("key").child("longitude").getValue();
-                    LatLng latLng = new LatLng(latiude, longitude);
-                    mMap.addMarker(new MarkerOptions().position(latLng));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-
-                    double latiude1 = (double) snapshot.child("Flag"+i).child("value").child("latitude").getValue();
-                    double longitude1 = (double) snapshot.child("Flag"+i).child("value").child("longitude").getValue();
-                    LatLng latLng1 = new LatLng(latiude1, longitude1);
-                    mMap.addMarker(new MarkerOptions().position(latLng1));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng1, 10));
-
-                    col=0;
-                    getRoute(latLng, latLng1);
-
-                    i=i+1;
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+        startTime = getIntent().getStringExtra("startTime");
         siz = hashMap.size();
+        int index = startTime.indexOf(":"), index2, index3;
+        if(startTime.contains("a")){
+            index2 = startTime.indexOf("a");
+            minute = Integer.parseInt(startTime.substring(index+1, index2-1));
+            subTime = "am";
+        }
+        else {
+            index3 = startTime.indexOf("p");
+            minute = Integer.parseInt(startTime.substring(index+1, index3-1));
+            subTime = "pm";
+        }
+        hour = Integer.parseInt(startTime.substring(0, index));
+
+        Toast.makeText(this, ""+hour+" "+minute, Toast.LENGTH_SHORT).show();
 
         mapFragment.getMapAsync(this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},  PackageManager.PERMISSION_GRANTED);
@@ -170,18 +131,73 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
 
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        databaseReference = databaseReference2.child("routes").child(s);
+
+        DatabaseReference databaseReference1= databaseReference.child("Flag");
+        databaseReference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot1) {
+
+                        double latitude = (double) snapshot1.child("source").child("latitude").getValue();
+                        double longitude = (double) snapshot1.child("source").child("longitude").getValue();
+                        sourceL = new LatLng(latitude, longitude);
+                        tempL1 = sourceL;
+                        mMap.addMarker(new MarkerOptions().position(sourceL).title("source"));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sourceL, 10));
+                        startTimeHashMap.put(sourceL, "0");
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                count = (int) snapshot.getChildrenCount();
+                while(j<count){
+                    double latiude1 = (double) snapshot.child("Flag"+j).child("value").child("latitude").getValue();
+                    double longitude1 = (double) snapshot.child("Flag"+j).child("value").child("longitude").getValue();
+                    String time = (String) snapshot.child("Flag"+j).child("time").getValue();
+                    LatLng latLng1 = new LatLng(latiude1, longitude1);
+                    startTimeHashMap.put(latLng1, time);
+                    j=j+1;
+                }
+                while(i<count){
+                    double latiude = (double) snapshot.child("Flag"+i).child("key").child("latitude").getValue();
+                    double longitude = (double) snapshot.child("Flag"+i).child("key").child("longitude").getValue();
+                    LatLng latLng = new LatLng(latiude, longitude);
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(startTimeHashMap.get(latLng)));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+
+                    Toast.makeText(UserRoute_GPSActivity.this, ""+startTimeHashMap.get(latLng), Toast.LENGTH_SHORT).show();
+                    double latiude1 = (double) snapshot.child("Flag"+i).child("value").child("latitude").getValue();
+                    double longitude1 = (double) snapshot.child("Flag"+i).child("value").child("longitude").getValue();
+                    String time = (String) snapshot.child("Flag"+i).child("time").getValue();
+                    LatLng latLng1 = new LatLng(latiude1, longitude1);
+                    mMap.addMarker(new MarkerOptions().position(latLng1).title(startTimeHashMap.get(latLng1)));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng1, 10));
+
+                    col=0;
+                    getRoute(latLng, latLng1);
+
+                    i=i+1;
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         locationListener = new android.location.LocationListener() {
@@ -199,11 +215,15 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                 //tempL = tempL1;*/
                 tempL = new LatLng(location.getLatitude(), location.getLongitude());
                 databaseReference2.child("bus_locations").child(busid).setValue(tempL);
-                mMap.addMarker(new MarkerOptions().position(tempL).title(busid).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tempL, 10));
+                if(tempM!=null)
+                {
+                    tempM.remove();
+                }
+                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tempL, 10));
                 Date date = Calendar.getInstance().getTime();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
                 String time = simpleDateFormat.format(date);
+                tempM = mMap.addMarker(new MarkerOptions().position(tempL).title(busid+"-"+time).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                 databaseReference2.child("bus_locations").child(busid).child("time").setValue(time);
                 Toast.makeText(UserRoute_GPSActivity.this, "n"+tempL1, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(UserRoute_GPSActivity.this, "a"+tempL1, Toast.LENGTH_SHORT).show();

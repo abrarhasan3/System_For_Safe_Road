@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/mybeigeblue"
+    android:gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:background="@color/white">
+        <NumberPicker
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/black"
+            android:id="@+id/hour_id"
+            android:layout_weight="1"
+            android:layout_margin="25dp"/>
+
+        <NumberPicker
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/black"
+            android:id="@+id/minute_id"
+            android:layout_weight="1"
+            android:layout_margin="25dp"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/set_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/mybeigeblue2"
+        android:text="SET TIMER"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+</LinearLayout>

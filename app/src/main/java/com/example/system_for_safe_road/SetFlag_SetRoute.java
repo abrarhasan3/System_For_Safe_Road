@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -56,10 +57,13 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
     HashMap<LatLng, String> timer_flag = new HashMap<>();
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
-    Button cancelBtn, removeBtn, saveBtn, doneBtn;
+    Button cancelBtn, removeBtn, saveBtn, doneBtn, timePickerBtn;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = db.getReference().child("users").child("routes");
     TimePicker timePicker;
+    Dialog timer_picker_dialog;
+    NumberPicker numberPicker, numberPicker1;
+    int hour, minute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,20 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
         routeID=getIntent().getStringExtra("routeID");
         searchView = findViewById(R.id.flag_search);
         polylines = new ArrayList<>();
+        timer_picker_dialog = new Dialog(this);
+        timer_picker_dialog.setCancelable(false);
+        timer_picker_dialog.setContentView(R.layout.time_picker);
+        numberPicker=timer_picker_dialog.findViewById(R.id.hour_id);
+        numberPicker1=timer_picker_dialog.findViewById(R.id.minute_id);
+        timePickerBtn=timer_picker_dialog.findViewById(R.id.set_timer);
+        numberPicker.setMinValue(00);
+        numberPicker.setMaxValue(99);
+        numberPicker1.setMinValue(00);
+        numberPicker1.setMaxValue(59);
+        int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
+        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.70);
+
+        timer_picker_dialog.getWindow().setLayout(width, height);
 
         //Toast.makeText(this, ""+source+destination, Toast.LENGTH_SHORT).show();
 
@@ -109,11 +127,11 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
 
                     if(flag_latlng.equals(destination_latlng)){
 
-                        dialog1.setContentView(R.layout.flag_timer);
+                        //dialog1.setContentView(R.layout.flag_timer);
                         dialog.setContentView(R.layout.custom_dialog_box_upon_reaching_destination);
-                        dialog1.show();
+                        //dialog1.show();
 
-                        timePicker = dialog1.findViewById(R.id.time_picker);
+                        /*timePicker = dialog1.findViewById(R.id.time_picker);
                         timePicker.setIs24HourView(false);
                         Button button2 = dialog1.findViewById(R.id.timer_ok);
                         button2.setOnClickListener(new View.OnClickListener() {
@@ -123,16 +141,41 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                                 Time time = new Time(timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
                                 Format format = new SimpleDateFormat("hh:mm aa");
                                 s= format.format(time);
-                                /*if(timePicker.getCurrentHour()>12){
+                                *//*if(timePicker.getCurrentHour()>12){
                                     s = timePicker.getCurrentHour().toString()+':'+timePicker.getCurrentMinute().toString()+" PM";
                                 }
                                 else {
                                     s = timePicker.getCurrentHour().toString()+':'+timePicker.getCurrentMinute().toString()+" AM";
-                                }*/
+                                }*//*
                                 //Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
                                 timer_flag.put(flag_latlng, s);
                                 //Toast.makeText(SetFlag_SetRoute.this, ""+flag_latlng+"time"+s, Toast.LENGTH_SHORT).show();
                                 dialog1.dismiss();
+                                dialog.show();
+                            }
+                        });*/
+
+                        timer_picker_dialog.show();
+                        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                hour = newVal;
+                            }
+                        });
+                        numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                minute = newVal;
+                            }
+                        });
+                        timePickerBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String sh = Integer.toString(hour), sm=Integer.toString(minute);
+                                String s = sh+':'+sm;
+                                Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
+                                timer_flag.put(flag_latlng, s);
+                                timer_picker_dialog.dismiss();
                                 dialog.show();
                             }
                         });
@@ -156,7 +199,30 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                         //Toast.makeText(FlaginRouteActivity.this, "Your Have Reached your destination", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        dialog.setContentView(R.layout.flag_timer);
+                        timer_picker_dialog.show();
+                        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                hour = newVal;
+                            }
+                        });
+                        numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                minute = newVal;
+                            }
+                        });
+                        timePickerBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String sh = Integer.toString(hour), sm=Integer.toString(minute);
+                                String s = sh+':'+sm;
+                                Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
+                                timer_flag.put(flag_latlng, s);
+                                timer_picker_dialog.dismiss();
+                            }
+                        });
+                        /*dialog.setContentView(R.layout.flag_timer);
                         dialog.show();
                         timePicker = dialog.findViewById(R.id.time_picker);
                         timePicker.setIs24HourView(false);
@@ -168,17 +234,17 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                                 Time time = new Time(timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
                                 Format format = new SimpleDateFormat("hh:mm aa");
                                 s= format.format(time);
-                                /*if(timePicker.getCurrentHour()>12){
+                                *//*if(timePicker.getCurrentHour()>12){
                                     s = timePicker.getCurrentHour().toString()+':'+timePicker.getCurrentMinute().toString()+" PM";
                                 }
                                 else {
                                     s = timePicker.getCurrentHour().toString()+':'+timePicker.getCurrentMinute().toString()+" AM";
-                                }*/
+                                }*//*
                                 //Toast.makeText(SetFlag_SetRoute.this, ""+flag_latlng+"time"+s, Toast.LENGTH_SHORT).show();
                                 timer_flag.put(flag_latlng, s);
                                 dialog.dismiss();
                             }
-                        });
+                        });*/
 
                     }
 
@@ -204,6 +270,7 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
 
         int hashsize = sourceDestination.size(), i=0;
         Toast.makeText(this, ""+hashsize, Toast.LENGTH_SHORT).show();
+        databaseReference.child(routeID).removeValue();
         databaseReference.child(routeID).child("source").setValue(source_latlng1);
         databaseReference.child(routeID).child("destination").setValue(destination_latlng);
         for(LatLng m : sourceDestination.keySet()){
@@ -310,7 +377,31 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                         @Override
                         public void onClick(View v) {
                             del_timer.dismiss();
-                            Dialog dialog3 = new Dialog(SetFlag_SetRoute.this);
+                            timer_picker_dialog.show();
+                            numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                                @Override
+                                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                    hour = newVal;
+                                }
+                            });
+                            numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                                @Override
+                                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                    minute = newVal;
+                                }
+                            });
+                            timePickerBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String sh = Integer.toString(hour), sm=Integer.toString(minute);
+                                    String s = sh+':'+sm;
+                                    Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
+                                    timer_flag.remove(latLng1);
+                                    timer_flag.put(latLng1, s);
+                                    timer_picker_dialog.dismiss();
+                                }
+                            });
+                            /*Dialog dialog3 = new Dialog(SetFlag_SetRoute.this);
                             dialog3.setCancelable(false);
                             dialog3.setContentView(R.layout.flag_timer);
                             dialog3.show();
@@ -325,18 +416,18 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                                     Time time = new Time(timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
                                     Format format = new SimpleDateFormat("hh:mm aa");
                                     s= format.format(time);
-                                    /*if(timePicker.getCurrentHour()>12){
+                                    *//*if(timePicker.getCurrentHour()>12){
                                         s = timePicker.getCurrentHour().toString()+':'+timePicker.getCurrentMinute().toString()+" PM";
                                     }
                                     else {
                                         s = timePicker.getCurrentHour().toString()+':'+timePicker.getCurrentMinute().toString()+" AM";
-                                    }*/
+                                    }*//*
                                     //Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
                                     timer_flag.remove(latLng1);
                                     timer_flag.put(latLng1, s);
                                     dialog3.dismiss();
                                 }
-                            });
+                            });*/
 
                         }
                     });
