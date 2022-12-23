@@ -11,9 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Select route id"
+        android:hint="Select bus id"
         android:textColorHint="@color/mybeigeblue"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        style="@style/MyTextInputLayout"
+        app:endIconTint="@color/mybeigeblue">
         <AutoCompleteTextView
             android:id="@+id/bus_id_on_route"
             android:layout_width="match_parent"

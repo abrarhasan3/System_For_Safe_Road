@@ -64,6 +64,7 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
     private LocationManager locationManager;
     HashMap<LatLng, LatLng> hashMap = new HashMap<>();
     HashMap<LatLng, String> startTimeHashMap = new HashMap<>();
+    HashMap<Integer, LatLng> flagHashMap = new HashMap<>();
     private final long MIN_TIME =100;
     private final long MIN_DIST = 5;//5 for testing
     Marker sourceM, destinationM, tempM, tempM1;
@@ -94,16 +95,16 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
         if(startTime.contains("a")){
             index2 = startTime.indexOf("a");
             minute = Integer.parseInt(startTime.substring(index+1, index2-1));
-            subTime = "am";
+            subTime = " am";
         }
         else {
             index3 = startTime.indexOf("p");
             minute = Integer.parseInt(startTime.substring(index+1, index3-1));
-            subTime = "pm";
+            subTime = " pm";
         }
         hour = Integer.parseInt(startTime.substring(0, index));
 
-        Toast.makeText(this, ""+hour+" "+minute, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ""+hour+" "+minute, Toast.LENGTH_SHORT).show();
 
         mapFragment.getMapAsync(this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},  PackageManager.PERMISSION_GRANTED);
@@ -164,17 +165,40 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                 while(j<count){
                     double latiude1 = (double) snapshot.child("Flag"+j).child("value").child("latitude").getValue();
                     double longitude1 = (double) snapshot.child("Flag"+j).child("value").child("longitude").getValue();
-                    String time = (String) snapshot.child("Flag"+j).child("time").getValue();
+                    String flagtime = (String) snapshot.child("Flag"+j).child("time").getValue();
+                    Integer flagtimeInt = Integer.parseInt(flagtime);
+                    Integer flagMin = (flagtimeInt+minute)%60;
+                    Integer flagHour = hour + ((flagtimeInt+minute)/60);
+                    if(flagHour>12){
+                        flagHour = flagHour%12;
+                        if(subTime.trim()=="am"){
+                            subTime=" "+"pm";
+                        }
+                        else {
+                            subTime=" "+"am";
+                        }
+                    }
+                    //Toast.makeText(UserRoute_GPSActivity.this, flagHour+":"+flagMin, Toast.LENGTH_SHORT).show();
+                    String h = Integer.toString(flagHour), m = Integer.toString(flagMin);
+                    String time = h+":"+m+subTime;
                     LatLng latLng1 = new LatLng(latiude1, longitude1);
                     startTimeHashMap.put(latLng1, time);
+                    hour = flagHour;
+                    minute = flagMin;
                     j=j+1;
                 }
                 while(i<count){
                     double latiude = (double) snapshot.child("Flag"+i).child("key").child("latitude").getValue();
                     double longitude = (double) snapshot.child("Flag"+i).child("key").child("longitude").getValue();
                     LatLng latLng = new LatLng(latiude, longitude);
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(startTimeHashMap.get(latLng)));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                    if(i==0){
+                        mMap.addMarker(new MarkerOptions().position(latLng).title("source"));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                    }
+                    else {
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(startTimeHashMap.get(latLng)));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                    }
 
                     Toast.makeText(UserRoute_GPSActivity.this, ""+startTimeHashMap.get(latLng), Toast.LENGTH_SHORT).show();
                     double latiude1 = (double) snapshot.child("Flag"+i).child("value").child("latitude").getValue();
@@ -183,6 +207,9 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                     LatLng latLng1 = new LatLng(latiude1, longitude1);
                     mMap.addMarker(new MarkerOptions().position(latLng1).title(startTimeHashMap.get(latLng1)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng1, 10));
+
+                    //all the markers except source
+                    flagHashMap.put(i, latLng1);
 
                     col=0;
                     getRoute(latLng, latLng1);
@@ -231,6 +258,13 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                 col=1;
                 getRoute(tempL1, tempL);
                 tempL1 = tempL;
+
+                for(int i:flagHashMap.keySet())
+                {
+
+                    //Toast.makeText(UserRoute_GPSActivity.this, i+" "+flagHashMap.get(i), Toast.LENGTH_SHORT).show();
+                }
+
                 //check();
             }
             @Override

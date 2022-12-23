@@ -40,7 +40,7 @@ public class bus_id_for_tracking extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.child("trips").getChildren()){
+                for(DataSnapshot dataSnapshot : snapshot.child("trips").child("routeID").getChildren()){
                     String s = dataSnapshot.getKey();
                     stringList.add(s);
                 }

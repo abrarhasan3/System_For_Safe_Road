@@ -36,7 +36,8 @@ public class bus_id_page extends AppCompatActivity {
         findViewById(R.id.user_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
+                Intent intent = new Intent(bus_id_page.this, admin_or_busdriver.class);
+                startActivity(intent);
             }
         });
 
@@ -47,11 +48,11 @@ public class bus_id_page extends AppCompatActivity {
             public void onClick(View v) {
                 String busId = bus.getText().toString();
                 Intent intent = new Intent(bus_id_page.this, User_Home_Activity.class);
-                String ts = "Please wait";
+                /*String ts = "Please wait";
                 Toast toast = Toast.makeText(getApplicationContext(), ts, Toast.LENGTH_SHORT);
                 View toastView = toast.getView();
                 toastView.setBackgroundResource(R.color.mybeigeblue2);
-                toast.show();
+                toast.show();*/
                 DatabaseReference databaseReference1 = databaseReference.child("trips").child("routeID").child(busId);
                 databaseReference1.addValueEventListener(new ValueEventListener() {
                     @Override
