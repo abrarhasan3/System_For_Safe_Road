@@ -239,10 +239,8 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
                 polyOptions.addAll(route.get(i).getPoints());
                 Polyline polyline = mMap.addPolyline(polyOptions);
                 polylines.add(polyline);
-
             }
         }
-
     }
 
     @Override
