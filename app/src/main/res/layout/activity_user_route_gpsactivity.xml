@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UserRoute_GPSActivity">
 
-    <fragment android:id="@+id/map"
+    <fragment android:id="@+id/map_Track_Admin"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
