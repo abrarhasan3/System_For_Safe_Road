@@ -116,20 +116,21 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                         e.printStackTrace();
                     }
                     Address address = addressList.get(0);
-                    flag_latlng = new LatLng(address.getLatitude(), address.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(flag_latlng).title("flag "+flag));
-                    //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(flag_latlng, 10));
-                    sourceDestination.put(source_latlng, flag_latlng);
-                    //Toast.makeText(FlaginRouteActivity.this, ""+sourceDestination.get(source_latlng)+"sl"+flag_latlng, Toast.LENGTH_SHORT).show();
-                    source_latlng=last_entered_latlng;
-                    getRoute();
-                    last_entered_latlng=flag_latlng;
+                    if(address!=null){
+                        flag_latlng = new LatLng(address.getLatitude(), address.getLongitude());
+                        mMap.addMarker(new MarkerOptions().position(flag_latlng).title("flag "+flag));
+                        //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(flag_latlng, 10));
+                        sourceDestination.put(source_latlng, flag_latlng);
+                        //Toast.makeText(FlaginRouteActivity.this, ""+sourceDestination.get(source_latlng)+"sl"+flag_latlng, Toast.LENGTH_SHORT).show();
+                        source_latlng=last_entered_latlng;
+                        getRoute();
+                        last_entered_latlng=flag_latlng;
 
-                    if(flag_latlng.equals(destination_latlng)){
+                        if(flag_latlng.equals(destination_latlng)){
 
-                        //dialog1.setContentView(R.layout.flag_timer);
-                        dialog.setContentView(R.layout.custom_dialog_box_upon_reaching_destination);
-                        //dialog1.show();
+                            //dialog1.setContentView(R.layout.flag_timer);
+                            dialog.setContentView(R.layout.custom_dialog_box_upon_reaching_destination);
+                            //dialog1.show();
 
                         /*timePicker = dialog1.findViewById(R.id.time_picker);
                         timePicker.setIs24HourView(false);
@@ -155,79 +156,79 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                             }
                         });*/
 
-                        timer_picker_dialog.show();
-                        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                            @Override
-                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                                hour = newVal;
-                            }
-                        });
-                        numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                            @Override
-                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                                minute = newVal;
-                            }
-                        });
-                        timePickerBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                hour = hour * 60;
-                                minute = minute + hour;
-                                //String sh = Integer.toString(hour), sm=Integer.toString(minute);
-                                //String s = sh+':'+sm;
-                                String s = Integer.toString(minute);
-                                Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
-                                timer_flag.put(flag_latlng, s);
-                                timer_picker_dialog.dismiss();
-                                dialog.show();
-                            }
-                        });
+                            timer_picker_dialog.show();
+                            numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                                @Override
+                                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                    hour = newVal;
+                                }
+                            });
+                            numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                                @Override
+                                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                    minute = newVal;
+                                }
+                            });
+                            timePickerBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    hour = hour * 60;
+                                    minute = minute + hour;
+                                    //String sh = Integer.toString(hour), sm=Integer.toString(minute);
+                                    //String s = sh+':'+sm;
+                                    String s = Integer.toString(minute);
+                                    Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
+                                    timer_flag.put(flag_latlng, s);
+                                    timer_picker_dialog.dismiss();
+                                    dialog.show();
+                                }
+                            });
 
-                        Button btn;
-                        btn = dialog.findViewById(R.id.dialog_dismiss);
-                        saveBtn = dialog.findViewById(R.id.save_the_route);
-                        btn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
-                        saveBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                save_in_firebase();
-                                dialog.dismiss();
-                            }
-                        });
-                        //Toast.makeText(FlaginRouteActivity.this, "Your Have Reached your destination", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        timer_picker_dialog.show();
-                        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                            @Override
-                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                                hour = newVal;
-                            }
-                        });
-                        numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                            @Override
-                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                                minute = newVal;
-                            }
-                        });
-                        timePickerBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                hour = hour * 60;
-                                minute = minute + hour;
-                                //String sh = Integer.toString(hour), sm=Integer.toString(minute);
-                                //String s = sh+':'+sm;
-                                String s = Integer.toString(minute);
-                                Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
-                                timer_flag.put(flag_latlng, s);
-                                timer_picker_dialog.dismiss();
-                            }
-                        });
+                            Button btn;
+                            btn = dialog.findViewById(R.id.dialog_dismiss);
+                            saveBtn = dialog.findViewById(R.id.save_the_route);
+                            btn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            saveBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    save_in_firebase();
+                                    dialog.dismiss();
+                                }
+                            });
+                            //Toast.makeText(FlaginRouteActivity.this, "Your Have Reached your destination", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            timer_picker_dialog.show();
+                            numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                                @Override
+                                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                    hour = newVal;
+                                }
+                            });
+                            numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                                @Override
+                                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                    minute = newVal;
+                                }
+                            });
+                            timePickerBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    hour = hour * 60;
+                                    minute = minute + hour;
+                                    //String sh = Integer.toString(hour), sm=Integer.toString(minute);
+                                    //String s = sh+':'+sm;
+                                    String s = Integer.toString(minute);
+                                    Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
+                                    timer_flag.put(flag_latlng, s);
+                                    timer_picker_dialog.dismiss();
+                                }
+                            });
                         /*dialog.setContentView(R.layout.flag_timer);
                         dialog.show();
                         timePicker = dialog.findViewById(R.id.time_picker);
@@ -252,8 +253,12 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                             }
                         });*/
 
-                    }
+                        }
 
+                    }
+                    else {
+                        Toast.makeText(SetFlag_SetRoute.this, "Invalid Location", Toast.LENGTH_SHORT).show();
+                    }
 
 
                 }
@@ -600,12 +605,12 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                                                 break;
                                             }
                                         }
-                                        for(LatLng m : sourceDestination.keySet()){
-                                            source_latlng=m;
-                                            flag_latlng=sourceDestination.get(m);
-                                            getRoute();
+                                    }
+                                    for(LatLng m : sourceDestination.keySet()){
+                                        source_latlng=m;
+                                        flag_latlng=sourceDestination.get(m);
+                                        getRoute();
 
-                                        }
                                     }
                                     marker.remove();
                                     //getRoute();

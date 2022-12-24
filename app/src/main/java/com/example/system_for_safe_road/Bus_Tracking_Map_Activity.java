@@ -42,6 +42,7 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
     String busIdString, routeIdString;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference().child("users"), databaseReference1, databaseReference2, databaseReference3;
+    DatabaseReference trackingBusReference = firebaseDatabase.getReference().child("users").child("track");
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.purple_700};
     private static final int[] COLORS1 = new int[]{R.color.mybeigeblue};
@@ -49,7 +50,7 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
     HashMap<LatLng, LatLng> flagHashMap = new HashMap<>();
     Button refreshBtn;
     LatLng sourceLatLng, desLatLng;
-    Marker tempM;
+    Marker tempM, routeM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,7 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
         polylines = new ArrayList<>();
         busIdString = getIntent().getStringExtra("busID");
         refreshBtn = findViewById(R.id.refreshLocation);
+        trackingBusReference = trackingBusReference.child(busIdString);
 
         mapFragment.getMapAsync(this);
 
@@ -79,16 +81,21 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot1) {
                 routeIdString = snapshot1.getValue().toString();
+                trackingBusReference = trackingBusReference.child(routeIdString);
 
                 databaseReference3 = databaseReference.child("routes").child(routeIdString);
                 databaseReference3.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                        sourceLatLng = new LatLng((Double) snapshot2.child("source").child("latitude").getValue(), (Double) snapshot2.child("source").child("longitude").getValue());
+                        sourceLatLng = new LatLng((Double) snapshot2
+                                .child("source").child("latitude").getValue(),
+                                (Double) snapshot2.child("source").child("longitude").getValue());
                         mMap.addMarker(new MarkerOptions().position(sourceLatLng).title("source"));
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(sourceLatLng));
 
-                        desLatLng = new LatLng((Double) snapshot2.child("destination").child("latitude").getValue(), (Double) snapshot2.child("destination").child("longitude").getValue());
+                        desLatLng = new LatLng((Double) snapshot2
+                                .child("destination").child("latitude").getValue(),
+                                (Double) snapshot2.child("destination").child("longitude").getValue());
                         mMap.addMarker(new MarkerOptions().position(desLatLng).title("destination"));
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(desLatLng));
                     }
@@ -98,21 +105,29 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
 
                     }
                 });
-                databaseReference2 = databaseReference.child("routes").child(routeIdString).child("Flag");
+                databaseReference2 = databaseReference.child("routes")
+                        .child(routeIdString).child("Flag");
                 databaseReference2.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         count = (int) snapshot.getChildrenCount();
                         while(i<count){
-                            double latiude = (double) snapshot.child("Flag"+i).child("key").child("latitude").getValue();
-                            double longitude = (double) snapshot.child("Flag"+i).child("key").child("longitude").getValue();
+                            double latiude = (double) snapshot
+                                    .child("Flag"+i).child("key").child("latitude").getValue();
+                            double longitude = (double) snapshot
+                                    .child("Flag"+i).child("key").child("longitude").getValue();
                             LatLng latLng = new LatLng(latiude, longitude);
+                            if(i==0){
+                                sourceLatLng=latLng;
+                            }
 
                             mMap.addMarker(new MarkerOptions().position(latLng));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 
-                            double latiude1 = (double) snapshot.child("Flag"+i).child("value").child("latitude").getValue();
-                            double longitude1 = (double) snapshot.child("Flag"+i).child("value").child("longitude").getValue();
+                            double latiude1 = (double) snapshot
+                                    .child("Flag"+i).child("value").child("latitude").getValue();
+                            double longitude1 = (double) snapshot
+                                    .child("Flag"+i).child("value").child("longitude").getValue();
                             LatLng latLng1 = new LatLng(latiude1, longitude1);
 
                             mMap.addMarker(new MarkerOptions().position(latLng1));
@@ -142,33 +157,28 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                databaseReference.child("bus_locations").child(busIdString).addValueEventListener(new ValueEventListener() {
+                Toast.makeText(Bus_Tracking_Map_Activity.this, "Refreshed", Toast.LENGTH_SHORT).show();
+                trackingBusReference.child("latlng_schedule").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        LatLng busLatLng = new LatLng((Double) snapshot.child("latitude").getValue(), (Double) snapshot.child("longitude").getValue());
-                        if(tempM!=null){
-                            tempM.remove();
-                        }
-                        tempM = mMap.addMarker(new MarkerOptions().position(busLatLng).title(busIdString).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(busLatLng, 15));
-                        for(LatLng latLng : flagHashMap.keySet()){
-                            Location start = new Location("A");
-                            start.setLatitude(busLatLng.latitude);
-                            start.setLongitude(busLatLng.longitude);
-
-                            Location end = new Location("B");
-                            end.setLatitude(latLng.latitude);
-                            end.setLongitude(latLng.longitude);
-
-                            double dist = start.distanceTo(end);
-                            if(dist<500){
-                                mMap.addMarker(new MarkerOptions().position(latLng).title("reached").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                        LatLng tempL = sourceLatLng;
+                        if(snapshot.exists()){
+                            for(DataSnapshot i:snapshot.getChildren()){
+                                double latitude = (double) i.child("latitude").getValue();
+                                double longitude = (double) i.child("longitude").getValue();
+                                LatLng tempL1 = new LatLng(latitude, longitude);
+                                col=1;
+                                getRoute(tempL, tempL1);
+                                tempL1 = tempL;
+                                routeM =  mMap.addMarker(new MarkerOptions().position(tempL1)
+                                        .title(busIdString+"_"+i.getKey())
+                                        .icon(BitmapDescriptorFactory
+                                                .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tempL1, 15));
+                                //Toast.makeText(Bus_Tracking_Map_Activity.this, ""+i.getKey()+" "+latitude, Toast.LENGTH_SHORT).show();
                             }
-                            //Toast.makeText(Bus_Tracking_Map_Activity.this, ""+flagHashMap.get(latLng), Toast.LENGTH_SHORT).show();
                         }
-                        col=1;
-                        getRoute(sourceLatLng, busLatLng);
+
                     }
 
                     @Override
@@ -176,7 +186,27 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
 
                     }
                 });
-                Toast.makeText(Bus_Tracking_Map_Activity.this, "Refreshed", Toast.LENGTH_SHORT).show();
+                databaseReference.child("bus_locations").child(busIdString).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        LatLng busLatLng = new LatLng((Double) snapshot.child("latitude").getValue(), (Double) snapshot.child("longitude").getValue());
+                        if(tempM!=null){
+                            tempM.remove();
+                        }
+                        tempM = mMap.addMarker(new MarkerOptions().position(busLatLng)
+                                .title(busIdString+"_current location")
+                                .icon(BitmapDescriptorFactory
+                                        .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(busLatLng, 15));
+                        col=1;
+                        //getRoute(sourceLatLng, busLatLng);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
 
