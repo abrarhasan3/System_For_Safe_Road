@@ -5,11 +5,20 @@ import static android.provider.Contacts.SettingsColumns.KEY;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,8 +42,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapReadyCallback, RoutingListener {
 
@@ -47,8 +59,12 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
     private List<Polyline> polylines = null;
     DatabaseReference reference ;
     long index_start = 0 , index_end;
-
     ArrayList<customArrayList_for_all_route> flags ;
+    Dialog timer_picker_dialog;
+    NumberPicker numberPicker,numberPicker1;
+    Button timePickerBtn;
+    int hour, minute;
+    HashMap<Long,customArrayList_for_all_route> flag_hash;
 
     int num = 1;
 
@@ -57,8 +73,8 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_edit_route_admin);
 
-
         flags = new ArrayList<>();
+        flag_hash = new HashMap<>();
         RouteId = getIntent().getStringExtra("RouteId");
         reference = FirebaseDatabase.getInstance().getReference().child("users").child("routes").child(RouteId);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -66,18 +82,93 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
         mapFragment.getMapAsync(this);
 
 
+        timer_picker_dialog = new Dialog(this);
+        timer_picker_dialog.setCancelable(true);
+        timer_picker_dialog.setContentView(R.layout.time_picker);
+        numberPicker=timer_picker_dialog.findViewById(R.id.hour_id);
+        numberPicker1=timer_picker_dialog.findViewById(R.id.minute_id);
+        timePickerBtn=timer_picker_dialog.findViewById(R.id.set_timer);
+        numberPicker.setMinValue(00);
+        numberPicker.setMaxValue(99);
+        numberPicker1.setMinValue(00);
+        numberPicker1.setMaxValue(59);
+        int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
+        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.70);
+        timer_picker_dialog.getWindow().setLayout(width, height);
+
+
+
+
     }
 
+    public  void Fetchdatabase()
+    {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.child("Flag").getChildren())
+                {
+                    Double a = (double)dataSnapshot.child("key").child("latitude").getValue();
+                    Double b = (double)dataSnapshot.child("key").child("longitude").getValue();
+                    index_start =(long) dataSnapshot.child("c_index").getValue();
+                    long next = (long)dataSnapshot.child("n_index").getValue();
+                    long prev = (long)dataSnapshot.child("p_index").getValue();
+
+                    Double a1 = (double)dataSnapshot.child("value").child("latitude").getValue();
+                    Double b1 = (double)dataSnapshot.child("value").child("longitude").getValue();
+
+                    customArrayList_for_all_route temp=new customArrayList_for_all_route(new LatLng(a,b),new LatLng(a1,b1),index_start,next,prev);
+                    flags.add(temp);
+                    flag_hash.put(index_start,temp);
+
+                }
+                //Toast.makeText(Track_Edit_Route_Admin.this,""+flags.size(),Toast.LENGTH_SHORT).show();
+                Findroutes();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.println(Log.ERROR,"Database",error.toString());
+
+            }
+        });
+    }
+
+    private void eraseLine() {
+        for(Polyline line : polylines){
+            line.remove();
+        }
+    }
     public void Findroutes()
     {
-
+        //eraseLine();
             for(int i =0;i<flags.size();i++)
             {
                 start = flags.get(i).getStart();
                 end = flags.get(i).getEnd();
+                if(flag_hash.get(flags.get(i).getNext()) != null)
+                {
+                    end=flag_hash.get(flags.get(i).getNext()).getStart();
+                }
+                else
+                {
+                    Log.println(Log.ERROR,"Hash Map Null","NULL");
+                }
+
+                //for()
+//                for(int j=0;i< flags.size();i++)
+//                {
+//                    Log.println(Log.ERROR, "TT","1: "+flags.get(i).getNext() +"  2:"+flags.get(j).getIndex() );
+////                    if(flags.get(i).getNext() == )
+////                    {
+////                        end = flags.get(j).getStart();
+////                    }
+//
+//                }
+                Log.println(Log.ERROR,"END 2", ""+end);
                 index_start = flags.get(i).getIndex();
 
-                Log.println(Log.ERROR,"index Val", ""+index_start);
+
 
                 Routing routing = new Routing.Builder()
                         .travelMode(AbstractRouting.TravelMode.DRIVING)
@@ -91,7 +182,8 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
         MarkerOptions endMarker = new MarkerOptions();
         endMarker.position(flags.get(flags.size()-1).getEnd());
         Marker m1 = mMap.addMarker(endMarker);
-         m1.setTag(flags.get(flags.size()-1).getIndex()+1);
+
+         m1.setTag(flags.get(flags.size()-1));
 
     }
 
@@ -165,7 +257,7 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
             Log.println(Log.ERROR,"DIFF",""+i +"  1: "+distance+"   2:"+distance2 );
             if(distance<100)
             {
-                m.setTag(flags.get(i).getIndex());
+                m.setTag(flags.get(i));
                 break;
             }
 
@@ -194,31 +286,9 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
         mMap = googleMap;
+        Fetchdatabase();
 
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.child("Flag").getChildren())
-                {
-                    Double a = (double)dataSnapshot.child("key").child("latitude").getValue();
-                    Double b = (double)dataSnapshot.child("key").child("longitude").getValue();
-                    index_start =(long) dataSnapshot.child("c_index").getValue();
-                    Double a1 = (double)dataSnapshot.child("value").child("latitude").getValue();
-                    Double b1 = (double)dataSnapshot.child("value").child("longitude").getValue();
 
-                    customArrayList_for_all_route temp=new customArrayList_for_all_route(new LatLng(a,b),new LatLng(a1,b1),index_start);
-                    flags.add(temp);
-                }
-                //Toast.makeText(Track_Edit_Route_Admin.this,""+flags.size(),Toast.LENGTH_SHORT).show();
-                Findroutes();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.println(Log.ERROR,"Database",error.toString());
-
-            }
-        });
 
         mMap.setOnPolylineClickListener(new GoogleMap.OnPolylineClickListener() {
             @Override
@@ -229,10 +299,181 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
-                long a =(long)marker.getTag();
-                Log.println(Log.ERROR,"LATLANG",""+a);
+                customArrayList_for_all_route markar_info =(customArrayList_for_all_route) marker.getTag();
 
-                Toast.makeText(Track_Edit_Route_Admin.this,""+a+"  "+marker.getPosition().latitude, Toast.LENGTH_SHORT).show();
+
+                Dialog editdialog = new Dialog(Track_Edit_Route_Admin.this);
+                editdialog.setCancelable(true);
+                editdialog.setContentView(R.layout.customdialog_rm_time_edit);
+                editdialog.show();
+                Button rmvBtn, timerBtn, editFlagLocation;
+                rmvBtn = editdialog.findViewById(R.id.removeButtonDialog);
+                timerBtn = editdialog.findViewById(R.id.timerButtonDialog);
+                editFlagLocation = editdialog.findViewById(R.id.edit_Location);
+
+                timerBtn.setText("EDIT TIME ?");
+                rmvBtn.setText("DELETE");
+
+
+
+                timerBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        editdialog.dismiss();
+                        timer_picker_dialog.show();
+
+                        numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                minute = newVal;
+                            }
+                        });
+                        timePickerBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                hour = hour * 60;
+                                minute = minute + hour;
+                                //String sh = Integer.toString(hour), sm=Integer.toString(minute);
+                                //String s = sh+':'+sm;
+                                String s = Integer.toString(minute);
+                                Toast.makeText(Track_Edit_Route_Admin.this, ""+s, Toast.LENGTH_SHORT).show();
+                                reference.child("Flag").child("Flag"+markar_info.getIndex()).child("time").setValue(s);
+                                timer_picker_dialog.dismiss();
+                            }
+                        });
+                    }
+                });
+
+                rmvBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editdialog.dismiss();
+                        //Log.println(Log.ERROR,"A","HI");
+                        Dialog dialog1 = new Dialog(Track_Edit_Route_Admin.this);
+                        dialog1.setCancelable(false);
+                        dialog1.setContentView(R.layout.deleting_marker);
+                        dialog1.show();
+                        Button cancelBtn = dialog1.findViewById(R.id.cancel);
+                        Button removeBtn = dialog1.findViewById(R.id.remove);
+                        TextView addressE = dialog1.findViewById(R.id.marker_address);
+                        TextView cityE = dialog1.findViewById(R.id.marker_city);
+                        Geocoder geocoder = new Geocoder(Track_Edit_Route_Admin.this, Locale.getDefault());
+                        List<Address> addressList = null;
+                        try {
+                            addressList = geocoder.getFromLocation(marker.getPosition().latitude, marker.getPosition().longitude, 1);
+                            addressE.setText(addressList.get(0).getAddressLine(0));
+                            cityE.setText(addressList.get(0).getLocality());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        cancelBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog1.dismiss();
+                            }
+                        });
+                        removeBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                reference.child("Flag").child("Flag"+markar_info.getPrev()).child("n_index").setValue(markar_info.getNext());
+                                reference.child("Flag").child("Flag"+markar_info.getNext()).child("p_index").setValue(markar_info.getPrev());
+                                reference.child("Flag").child("Flag"+markar_info.getIndex()).removeValue();
+                                marker.remove();
+                                eraseLine();
+                                polylines.clear();
+                                flags.clear();
+                                Fetchdatabase();
+                                dialog1.dismiss();
+                            }
+                        });
+                    }
+                });
+
+                editFlagLocation.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        editdialog.dismiss();
+                        Dialog dialog11 = new Dialog(Track_Edit_Route_Admin.this);
+                        dialog11.setCancelable(true);
+                        dialog11.setContentView(R.layout.search_dialog);
+
+                        dialog11.show();
+
+                        SearchView searchView = dialog11.findViewById(R.id.edit_Flag);
+
+                        Button button =dialog11.findViewById(R.id.cancel_button_search);
+                        button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog11.dismiss();
+                            }
+                        });
+
+                        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                            @Override
+                            public boolean onQueryTextSubmit(String s) {
+                                dialog11.dismiss();
+                                String new_flag = searchView.getQuery().toString();
+
+                                List<Address> addressList = null;
+                                if (new_flag != null || new_flag.equals("")) {
+                                    Geocoder geocoder = new Geocoder(Track_Edit_Route_Admin.this);
+                                    try {
+                                        addressList = geocoder.getFromLocationName(new_flag, 1);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    Address address = addressList.get(0);
+                                    LatLng flag_latlng = new LatLng(address.getLatitude(), address.getLongitude());
+                                    Log.println(Log.ERROR,"ERR",""+flag_latlng);
+                                    reference.child("Flag").child("Flag" + markar_info.getIndex()).child("key").child("latitude").setValue(address.getLatitude());
+                                    reference.child("Flag").child("Flag" + markar_info.getIndex()).child("key").child("longitude").setValue(address.getLongitude());
+                                    //mMap.addMarker(new MarkerOptions().position(flag_latlng));
+                                    marker.remove();
+                                    eraseLine();
+                                    polylines.clear();
+                                    flags.clear();
+                                    Fetchdatabase();
+
+                                }
+
+//                                timer_picker_dialog.show();
+//                                numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+//                                    @Override
+//                                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+//                                        hour = newVal;
+//                                    }
+//                                });
+//                                numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+//                                    @Override
+//                                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+//                                        minute = newVal;
+//                                    }
+//                                });
+//                                timePickerBtn.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        hour = hour * 60;
+//                                        minute = minute + hour;
+//                                        String s = Integer.toString(minute);
+//                                        timer_picker_dialog.dismiss();
+//                                        reference.child("Flag").child("Flag" + markar_info.getIndex()).child("time").setValue(s);
+//                                    }
+//                                });
+                                return false;
+                            }
+                            @Override
+                            public boolean onQueryTextChange(String s) {
+                                return false;
+                            }
+                        });
+                    }
+                });
+
+
+
                 return false;
             }
         });

@@ -15,13 +15,27 @@ public class customArrayList_for_all_route {
         return index;
     }
 
+    public long getNext() {
+        return next;
+    }
+
+    public long getPrev() {
+        return prev;
+    }
+
     LatLng start;
     LatLng end;
     long index;
+    long next;
+    long prev;
 
-    public customArrayList_for_all_route(LatLng start, LatLng end, long index) {
+    public customArrayList_for_all_route(LatLng start, LatLng end, long index, long next, long prev) {
         this.start = start;
         this.end = end;
         this.index = index;
+        this.next = next;
+        this.prev = prev;
     }
+
+
 }

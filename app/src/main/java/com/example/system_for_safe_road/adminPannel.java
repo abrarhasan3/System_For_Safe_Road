@@ -108,6 +108,13 @@ public class adminPannel extends AppCompatActivity {
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 1;
                         }
+                        else if(index==4)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.viewAllRoute);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 1;
+                        }
                     }
 
                 }

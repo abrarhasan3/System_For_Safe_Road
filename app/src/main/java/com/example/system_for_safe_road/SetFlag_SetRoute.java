@@ -286,6 +286,9 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
             databaseReference.child(routeID).child("Flag").child("Flag"+i).child("value").setValue(sourceDestination.get(mm));
             databaseReference.child(routeID).child("Flag").child("Flag"+i).child("time").setValue(timer_flag.get(sourceDestination.get(mm)));
             databaseReference.child(routeID).child("Flag").child("Flag"+i).child("c_index").setValue(i);
+            databaseReference.child(routeID).child("Flag").child("Flag"+i).child("n_index").setValue(i+1);
+            databaseReference.child(routeID).child("Flag").child("Flag"+i).child("p_index").setValue(i-1);
+
             LatLng v = sourceDestination.get(mm);
             mm = v;
             if(v==destination_latlng)
