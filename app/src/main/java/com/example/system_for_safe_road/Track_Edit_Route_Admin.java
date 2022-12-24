@@ -91,7 +91,7 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
         MarkerOptions endMarker = new MarkerOptions();
         endMarker.position(flags.get(flags.size()-1).getEnd());
         Marker m1 = mMap.addMarker(endMarker);
-         m1.setTag(flags.get(flags.size()-1).getIndex());
+         m1.setTag(flags.get(flags.size()-1).getIndex()+1);
 
     }
 
@@ -163,7 +163,7 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
             double distance = temp1.distanceTo(temp2);
             double distance2 = temp3.distanceTo(temp4);
             Log.println(Log.ERROR,"DIFF",""+i +"  1: "+distance+"   2:"+distance2 );
-            if(distance<1000 && distance2<1000)
+            if(distance<100)
             {
                 m.setTag(flags.get(i).getIndex());
                 break;
