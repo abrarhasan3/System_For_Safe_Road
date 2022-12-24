@@ -142,6 +142,7 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 databaseReference.child("bus_locations").child(busIdString).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -149,7 +150,7 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
                         if(tempM!=null){
                             tempM.remove();
                         }
-                        tempM = mMap.addMarker(new MarkerOptions().position(busLatLng).title(busIdString).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+                        tempM = mMap.addMarker(new MarkerOptions().position(busLatLng).title(busIdString).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(busLatLng, 15));
                         for(LatLng latLng : flagHashMap.keySet()){
                             Location start = new Location("A");
@@ -161,7 +162,7 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
                             end.setLongitude(latLng.longitude);
 
                             double dist = start.distanceTo(end);
-                            if(dist<50){
+                            if(dist<500){
                                 mMap.addMarker(new MarkerOptions().position(latLng).title("reached").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
                             }
                             //Toast.makeText(Bus_Tracking_Map_Activity.this, ""+flagHashMap.get(latLng), Toast.LENGTH_SHORT).show();
@@ -175,6 +176,7 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
 
                     }
                 });
+                Toast.makeText(Bus_Tracking_Map_Activity.this, "Refreshed", Toast.LENGTH_SHORT).show();
             }
         });
 

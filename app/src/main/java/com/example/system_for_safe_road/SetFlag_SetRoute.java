@@ -171,8 +171,11 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                         timePickerBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String sh = Integer.toString(hour), sm=Integer.toString(minute);
-                                String s = sh+':'+sm;
+                                hour = hour * 60;
+                                minute = minute + hour;
+                                //String sh = Integer.toString(hour), sm=Integer.toString(minute);
+                                //String s = sh+':'+sm;
+                                String s = Integer.toString(minute);
                                 Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
                                 timer_flag.put(flag_latlng, s);
                                 timer_picker_dialog.dismiss();
@@ -215,8 +218,11 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                         timePickerBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String sh = Integer.toString(hour), sm=Integer.toString(minute);
-                                String s = sh+':'+sm;
+                                hour = hour * 60;
+                                minute = minute + hour;
+                                //String sh = Integer.toString(hour), sm=Integer.toString(minute);
+                                //String s = sh+':'+sm;
+                                String s = Integer.toString(minute);
                                 Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
                                 timer_flag.put(flag_latlng, s);
                                 timer_picker_dialog.dismiss();
@@ -274,13 +280,26 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
         databaseReference.child(routeID).removeValue();
         databaseReference.child(routeID).child("source").setValue(source_latlng1);
         databaseReference.child(routeID).child("destination").setValue(destination_latlng);
-        for(LatLng m : sourceDestination.keySet()){
+        LatLng mm = source_latlng1;
+        while(i<hashsize){
+            databaseReference.child(routeID).child("Flag").child("Flag"+i).child("key").setValue(mm);
+            databaseReference.child(routeID).child("Flag").child("Flag"+i).child("value").setValue(sourceDestination.get(mm));
+            databaseReference.child(routeID).child("Flag").child("Flag"+i).child("time").setValue(timer_flag.get(sourceDestination.get(mm)));
+            LatLng v = sourceDestination.get(mm);
+            mm = v;
+            if(v==destination_latlng)
+            {
+                break;
+            }
+            i++;
+        }
+        /*for(LatLng m : sourceDestination.keySet()){
             databaseReference.child(routeID).child("Flag").child("Flag"+i).child("key").setValue(m);
             databaseReference.child(routeID).child("Flag").child("Flag"+i).child("value").setValue(sourceDestination.get(m));
             databaseReference.child(routeID).child("Flag").child("Flag"+i).child("time").setValue(timer_flag.get(sourceDestination.get(m)));
             databaseReference.child(routeID).child("Flag").child("Flag"+i).child("c_index").setValue(i);
             i++;
-        }
+        }*/
 
         //databaseReference.child(routeID).updateChildren(sourceDestination);
         /*Map<String, Object> mysourceDest = new HashMap<>();
@@ -395,8 +414,11 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                             timePickerBtn.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    String sh = Integer.toString(hour), sm=Integer.toString(minute);
-                                    String s = sh+':'+sm;
+                                    hour = hour * 60;
+                                    minute = minute + hour;
+                                    //String sh = Integer.toString(hour), sm=Integer.toString(minute);
+                                    //String s = sh+':'+sm;
+                                    String s = Integer.toString(minute);
                                     Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
                                     timer_flag.remove(latLng1);
                                     timer_flag.put(latLng1, s);

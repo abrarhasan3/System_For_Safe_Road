@@ -71,15 +71,9 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".admin_home_temporary"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".Admin_Add_Trip"
-            android:exported="true">
+            android:exported="true"
+            android:parentActivityName=".adminPannel">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -103,13 +97,6 @@
             android:label="@string/title_activity_set_flag_set_route"
             android:parentActivityName=".AdminRouteSelectionActivity" />
         <activity
-            android:name=".AdminFlagDetailsActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".AdminRouteSelectionActivity"
             android:exported="true"
             android:parentActivityName=".admin_or_busdriver">
@@ -128,7 +115,7 @@
             android:name=".bus_id_page"
             android:exported="true"
             android:parentActivityName=".admin_or_busdriver">
-            <meta-data
+        <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
@@ -141,6 +128,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

@@ -1,6 +1,7 @@
 package com.example.system_for_safe_road;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -46,6 +47,8 @@ public class Admin_Add_Trip extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_trip);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         enterBtn = findViewById(R.id.entering_trip);
         bus_id_txt = findViewById(R.id.entering_bus_id);
@@ -76,7 +79,7 @@ public class Admin_Add_Trip extends AppCompatActivity {
         });
 
         autoCompleteTextView = findViewById(R.id.auto_complete_txt);
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.route_list, stringList);
+        arrayAdapter = new ArrayAdapter<>(Admin_Add_Trip.this, R.layout.route_list, stringList);
         autoCompleteTextView.setAdapter(arrayAdapter);
         /*autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
