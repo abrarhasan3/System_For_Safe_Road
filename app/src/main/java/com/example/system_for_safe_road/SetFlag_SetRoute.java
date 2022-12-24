@@ -268,7 +268,8 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
 
     private void save_in_firebase() {
 
-        int hashsize = sourceDestination.size(), i=0;
+        int hashsize = sourceDestination.size();
+        long i=0;
         Toast.makeText(this, ""+hashsize, Toast.LENGTH_SHORT).show();
         databaseReference.child(routeID).removeValue();
         databaseReference.child(routeID).child("source").setValue(source_latlng1);
@@ -277,6 +278,7 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
             databaseReference.child(routeID).child("Flag").child("Flag"+i).child("key").setValue(m);
             databaseReference.child(routeID).child("Flag").child("Flag"+i).child("value").setValue(sourceDestination.get(m));
             databaseReference.child(routeID).child("Flag").child("Flag"+i).child("time").setValue(timer_flag.get(sourceDestination.get(m)));
+            databaseReference.child(routeID).child("Flag").child("Flag"+i).child("c_index").setValue(i);
             i++;
         }
 
@@ -479,7 +481,7 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
                                     else {
                                         for(LatLng i : sourceDestination.keySet()){
                                             if(sourceDestination.get(i).equals(latLng1)){
-                                                Toast.makeText(SetFlag_SetRoute.this, "bliblablu1", Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(SetFlag_SetRoute.this, "bliblablu1", Toast.LENGTH_SHORT).show();
                                                 source_latlng=i;
                                                 flag_latlng=sourceDestination.get(latLng1);
                                                 sourceDestination.put(i, sourceDestination.get(latLng1));

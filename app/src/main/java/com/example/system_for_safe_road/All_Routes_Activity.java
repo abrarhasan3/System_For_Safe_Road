@@ -115,45 +115,4 @@ public class All_Routes_Activity extends AppCompatActivity  {
             }
         });
     }
-
-
-
-//
-//    @Override
-//    public void onRoutingFailure(RouteException e) {
-
-//    }
-//
-//    @Override
-//    public void onRoutingStart() {
-//
-//
-//    }
-//
-
-
-
-
-
-
-//
-//    @Override
-//    public void onRoutingCancelled() {
-//
-//    }
-//
-//    @Override
-//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-//
-//    }
-
-//    @Override
-//    public void onMapReady(@NonNull GoogleMap googleMap) {
-//
-//    }
-//
-//    @Override
-//    public void onPointerCaptureChanged(boolean hasCapture) {
-//
-//    }
 }
