@@ -334,6 +334,94 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
 
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(@NonNull LatLng flatLng) {
+                Toast.makeText(SetFlag_SetRoute.this, ""+flatLng, Toast.LENGTH_SHORT).show();
+                Dialog dialog = new Dialog(SetFlag_SetRoute.this);
+                dialog.setCancelable(false);
+                flag_latlng = flatLng;
+                mMap.addMarker(new MarkerOptions().position(flag_latlng).title("flag "+flag));
+                sourceDestination.put(source_latlng, flag_latlng);
+                source_latlng=last_entered_latlng;
+                getRoute();
+                last_entered_latlng=flag_latlng;
+
+                if(flag_latlng.equals(destination_latlng)){
+                    dialog.setContentView(R.layout.custom_dialog_box_upon_reaching_destination);
+                    timer_picker_dialog.show();
+                    numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                        @Override
+                        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                            hour = newVal;
+                        }
+                    });
+                    numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                        @Override
+                        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                            minute = newVal;
+                        }
+                    });
+                    timePickerBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            hour = hour * 60;
+                            minute = minute + hour;
+                            String s = Integer.toString(minute);
+                            Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
+                            timer_flag.put(flag_latlng, s);
+                            timer_picker_dialog.dismiss();
+                            dialog.show();
+                        }
+                    });
+
+                    Button btn;
+                    btn = dialog.findViewById(R.id.dialog_dismiss);
+                    saveBtn = dialog.findViewById(R.id.save_the_route);
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    saveBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            save_in_firebase();
+                            dialog.dismiss();
+                        }
+                    });
+                }
+                else {
+                    timer_picker_dialog.show();
+                    numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                        @Override
+                        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                            hour = newVal;
+                        }
+                    });
+                    numberPicker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                        @Override
+                        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                            minute = newVal;
+                        }
+                    });
+                    timePickerBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            hour = hour * 60;
+                            minute = minute + hour;
+                            String s = Integer.toString(minute);
+                            Toast.makeText(SetFlag_SetRoute.this, ""+s, Toast.LENGTH_SHORT).show();
+                            timer_flag.put(flag_latlng, s);
+                            timer_picker_dialog.dismiss();
+                        }
+                    });
+
+                }
+            }
+        });
+
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
@@ -606,4 +694,5 @@ public class SetFlag_SetRoute extends AppCompatActivity implements OnMapReadyCal
     public void onRoutingCancelled() {
 
     }
+
 }
