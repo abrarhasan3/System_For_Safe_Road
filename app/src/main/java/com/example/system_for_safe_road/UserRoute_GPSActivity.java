@@ -40,6 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,8 +56,9 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
     private GoogleMap mMap;
     private ActivityUserRouteGpsactivityBinding binding;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference trackingBusReference = firebaseDatabase.getReference().child("users").child("track");
     DatabaseReference databaseReference2 =  firebaseDatabase.getReference().child("users"), databaseReference;
-    int i=0, count, j=0;
+    int i=0, count, j=0, flagInt=0;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.purple_700};
     private static final int[] COLORS1 = new int[]{R.color.mybeigeblue};
@@ -83,7 +85,7 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map_Track_Admin);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         polylines = new ArrayList<>();
@@ -91,6 +93,7 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
         busid = getIntent().getStringExtra("busid");
         startTime = getIntent().getStringExtra("startTime");
         siz = hashMap.size();
+        trackingBusReference = trackingBusReference.child(busid).child(s);
         int index = startTime.indexOf(":"), index2, index3;
         if(startTime.contains("a")){
             index2 = startTime.indexOf("a");
@@ -200,7 +203,7 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
                     }
 
-                    Toast.makeText(UserRoute_GPSActivity.this, ""+startTimeHashMap.get(latLng), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(UserRoute_GPSActivity.this, ""+startTimeHashMap.get(latLng), Toast.LENGTH_SHORT).show();
                     double latiude1 = (double) snapshot.child("Flag"+i).child("value").child("latitude").getValue();
                     double longitude1 = (double) snapshot.child("Flag"+i).child("value").child("longitude").getValue();
                     String time = (String) snapshot.child("Flag"+i).child("time").getValue();
@@ -250,18 +253,50 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                 Date date = Calendar.getInstance().getTime();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
                 String time = simpleDateFormat.format(date);
+
                 tempM = mMap.addMarker(new MarkerOptions().position(tempL).title(busid+"-"+time).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                 databaseReference2.child("bus_locations").child(busid).child("time").setValue(time);
-                Toast.makeText(UserRoute_GPSActivity.this, "n"+tempL1, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(UserRoute_GPSActivity.this, "n"+tempL1, Toast.LENGTH_SHORT).show();
                 hashMap.put(tempL1, tempL);
                 col=1;
                 getRoute(tempL1, tempL);
                 tempL1 = tempL;
 
-                for(int i:flagHashMap.keySet())
-                {
+                int size = flagHashMap.size();
+                if(Integer.compare(flagInt, size)<0){
+                    Location currentL = new Location("A");
+                    currentL.setLatitude(tempL.latitude);
+                    currentL.setLongitude(tempL.longitude);
+                    Location flagToCheck = new Location("B");
+                    flagToCheck.setLatitude(flagHashMap.get(flagInt).latitude);
+                    flagToCheck.setLongitude(flagHashMap.get(flagInt).longitude);
+                    LatLng flatToCheckL = new LatLng(flagToCheck.getLatitude(), flagToCheck.getLongitude());
+                    String time1 = startTimeHashMap.get(flatToCheckL);
+                    double distance = currentL.distanceTo(flagToCheck);//meter
+                    double ideal = 2000.0000;//meter
+                    Date time2, timeCurrent;
+                    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+                    try {
+                        time2 = sdf.parse(time1);
+                        timeCurrent = sdf.parse(time);
+                        Toast.makeText(UserRoute_GPSActivity.this, timeCurrent+" "+time2, Toast.LENGTH_SHORT).show();
 
-                    //Toast.makeText(UserRoute_GPSActivity.this, i+" "+flagHashMap.get(i), Toast.LENGTH_SHORT).show();
+                        if(timeCurrent.after(time2) && Double.compare(distance, ideal)>0){
+                            trackingBusReference.child("crossed").child(String.valueOf(timeCurrent)).setValue("yes");
+                            //Toast.makeText(UserRoute_GPSActivity.this, "yes"+flagInt, Toast.LENGTH_SHORT).show();
+
+                            //pop up notification
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(Double.compare(distance, ideal)<0){
+                        Toast.makeText(UserRoute_GPSActivity.this, "d"+distance, Toast.LENGTH_SHORT).show();
+                        String flag = String.valueOf(flagInt);
+                        trackingBusReference.child(flag).setValue(time);
+                        flagInt=flagInt+1;
+                    }
                 }
 
                 //check();
