@@ -18,6 +18,7 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -89,7 +90,9 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
             }
         MarkerOptions endMarker = new MarkerOptions();
         endMarker.position(flags.get(flags.size()-1).getEnd());
-        mMap.addMarker(endMarker);
+        Marker m1 = mMap.addMarker(endMarker);
+         m1.setTag(flags.get(flags.size()-1).getIndex());
+
     }
 
     @Override
@@ -160,13 +163,15 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
             double distance = temp1.distanceTo(temp2);
             double distance2 = temp3.distanceTo(temp4);
             Log.println(Log.ERROR,"DIFF",""+i +"  1: "+distance+"   2:"+distance2 );
-            if(distance<20 && distance2<20)
+            if(distance<1000 && distance2<1000)
             {
                 m.setTag(flags.get(i).getIndex());
                 break;
             }
 
         }
+
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(polylineEndLatLng, 10));
 
 
 
