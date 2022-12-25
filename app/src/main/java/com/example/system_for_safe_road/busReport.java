@@ -25,7 +25,8 @@ public class busReport extends AppCompatActivity {
 
     String busID;
     DatabaseReference reference;
-    String flag,atime,delay,rime;
+    String flag,atime,delay,rTime;
+    int isDelay;
     public List<customClassR> userlist=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,28 @@ public class busReport extends AppCompatActivity {
 
                     flag = dataSnapshot.getKey();
                     atime = dataSnapshot.child("time").getValue().toString();
+                    if(snapshot.child("track").child(busID).child(routeId).child("reaching_schedule").hasChild(flag))
+                    {
+                        rTime = snapshot.child("track").child(busID).child(routeId).child("reaching_schedule").child(flag).child("reaching_time").getValue().toString();
+                        String delayT = snapshot.child("track").child(busID).child(routeId).child("reaching_schedule").child(flag).child("time_difference").getValue().toString();
+                        if(delayT.charAt(0) == '-')
+                        {
+                            delay = "No Delay";
+                            isDelay = 0;
+                        }
+                        else
+                        {
+
+                            delay = delayT.substring(1,delayT.length());
+                            isDelay = 1;
+                        }
+                    }
+                    else
+                    {
+                        rTime = "NOT YET REACHED";
+                        delay = "Not Available";
+
+                    }
                     initData();
 
                 }
@@ -98,7 +121,7 @@ public class busReport extends AppCompatActivity {
         //userlist.add(new Modelclassfor_recycle(price1,name1,changePercent,ticker));
 
 
-        userlist.add(new customClassR(flag,atime,"0.0","5.2"));
+        userlist.add(new customClassR(flag,atime,delay,rTime,isDelay));
     }
 
     private void initRecyclerView() {

@@ -12,6 +12,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Flag No"
+            android:textColor="@color/black"
+
+            android:textSize="15sp"
             android:id="@+id/flagNo"
             android:layout_marginRight="10dp"
             />
@@ -20,23 +23,39 @@
             android:layout_height="wrap_content"
             android:text="ACCTUAL TIME"
             android:id="@+id/actualtime"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             android:layout_toRightOf="@id/flagNo"
+            android:layout_marginRight="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Delay"
+            android:layout_toRightOf="@id/actualtime"
+            android:id="@+id/reached_time"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             android:layout_marginRight="10dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Delay"
-            android:layout_toRightOf="@id/actualtime"
+            android:layout_toRightOf="@id/reached_time"
             android:id="@+id/totaldelay"
+            android:textSize="15sp"
+            android:textColor="@color/black"
             android:layout_marginRight="10dp"
             />
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/status"
             android:layout_toRightOf="@id/totaldelay"
-            android:src="@drawable/cctv"
+            android:src="@drawable/alert"
+
             android:layout_marginRight="10dp"
 
             />

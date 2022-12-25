@@ -37,7 +37,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         String aTime=data.get(position).getAcctualtime();
         String rTime=data.get(position).getReachedtime();
         String dTime=data.get(position).getDelay();
-        holder.setData(flag,aTime,dTime,rTime);
+        int isDelay = data.get(position).getIsDelay();
+        holder.setData(flag,aTime,dTime,rTime,isDelay);
 
 
     }
@@ -48,7 +49,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView textView,textView1,textView2;
+        private TextView textView,textView1,textView2,textView3;
 
         public ImageView imageView ;
 
@@ -57,16 +58,22 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             textView= itemView.findViewById(R.id.flagNo);
             textView1=itemView.findViewById(R.id.actualtime);
             textView2=itemView.findViewById(R.id.totaldelay);
+            textView3=itemView.findViewById(R.id.reached_time);
             imageView = itemView.findViewById(R.id.status);
 
 
         }
 
 
-        public void setData(String flag,String aTime, String dTime, String rTime ) {
+        public void setData(String flag,String aTime, String dTime, String rTime,int isDelay ) {
             textView.setText(flag);
             textView1.setText(aTime);
             textView2.setText(dTime);
+            textView3.setText(rTime);
+            if(isDelay == 0)
+            {
+                imageView.setImageResource(R.drawable.varified);
+            }
 
         }
 
