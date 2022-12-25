@@ -28,7 +28,8 @@ public class admin_or_busdriver extends AppCompatActivity {
         layout2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(admin_or_busdriver.this,bus_id_page.class);
+                //Intent intent = new Intent(admin_or_busdriver.this,bus_id_page.class);
+                Intent intent = new Intent(admin_or_busdriver.this,BusId_or_Classification.class);
                 startActivity(intent);
                 finish();
             }
