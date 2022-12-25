@@ -51,6 +51,7 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
     Button refreshBtn;
     LatLng sourceLatLng, desLatLng;
     Marker tempM, routeM;
+    LatLng tempL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,6 +120,7 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
                             LatLng latLng = new LatLng(latiude, longitude);
                             if(i==0){
                                 sourceLatLng=latLng;
+                                tempL = sourceLatLng;
                             }
 
                             mMap.addMarker(new MarkerOptions().position(latLng));
@@ -161,20 +163,20 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
                 trackingBusReference.child("latlng_schedule").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        LatLng tempL = sourceLatLng;
                         if(snapshot.exists()){
+                            tempL = sourceLatLng;
                             for(DataSnapshot i:snapshot.getChildren()){
                                 double latitude = (double) i.child("latitude").getValue();
                                 double longitude = (double) i.child("longitude").getValue();
                                 LatLng tempL1 = new LatLng(latitude, longitude);
                                 col=1;
-                                getRoute(tempL, tempL1);
-                                tempL1 = tempL;
                                 routeM =  mMap.addMarker(new MarkerOptions().position(tempL1)
                                         .title(busIdString+"_"+i.getKey())
                                         .icon(BitmapDescriptorFactory
                                                 .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tempL1, 15));
+                                getRoute(tempL, tempL1);
+                                tempL = tempL1;
                                 //Toast.makeText(Bus_Tracking_Map_Activity.this, ""+i.getKey()+" "+latitude, Toast.LENGTH_SHORT).show();
                             }
                         }
