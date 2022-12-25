@@ -199,7 +199,7 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                     j=j+1;
                 }
                 while(i<count){
-                    Toast.makeText(UserRoute_GPSActivity.this, i+" "+count, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(UserRoute_GPSActivity.this, i+" "+count, Toast.LENGTH_SHORT).show();
                     double latiude = (double) snapshot.child("Flag"+i).child("key").child("latitude").getValue();
                     double longitude = (double) snapshot.child("Flag"+i).child("key").child("longitude").getValue();
                     LatLng latLng = new LatLng(latiude, longitude);
@@ -254,6 +254,7 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()){
+                                tempL_schedule = sourceL;
                                 for(DataSnapshot i:snapshot.getChildren()){
                                     double latitude_schedule = (double) i.child("latitude").getValue();
                                     double longitude_schedule = (double) i.child("longitude").getValue();
@@ -271,7 +272,7 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                                         Toast.makeText(UserRoute_GPSActivity.this, "last", Toast.LENGTH_SHORT).show();
                                         tempL1 = tempL1_schedule;
                                     }
-                                    Toast.makeText(UserRoute_GPSActivity.this, ""+i.getKey(), Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(UserRoute_GPSActivity.this, ""+i.getKey(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -303,7 +304,7 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
 
                     int size = flagHashMap.size();
 
-                    Toast.makeText(UserRoute_GPSActivity.this, "myfollowingFlag"+myfollowingFlag, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(UserRoute_GPSActivity.this, "myfollowingFlag"+myfollowingFlag, Toast.LENGTH_SHORT).show();
                     if(Integer.compare(flagInt, size)<0){
 
                         Location currentL = new Location("A");
@@ -376,9 +377,7 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
-
-                        }
-                        if(flagInt==size){
+                            /*if(flatToCheckL.equals(destinationL)){
                             Toast.makeText(UserRoute_GPSActivity.this, "Reached", Toast.LENGTH_SHORT).show();
                             Dialog dialog = new Dialog(UserRoute_GPSActivity.this);
                             dialog.setContentView(R.layout.upon_reaching_destination);
@@ -394,7 +393,26 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                                     dialog.dismiss();
                                 }
                             });
+                        }*/
+
                         }
+                        /*if(flatToCheckL.equals(destinationL)){
+                            Toast.makeText(UserRoute_GPSActivity.this, "Reached", Toast.LENGTH_SHORT).show();
+                            Dialog dialog = new Dialog(UserRoute_GPSActivity.this);
+                            dialog.setContentView(R.layout.upon_reaching_destination);
+                            dialog.show();
+                            TextView textView = dialog.findViewById(R.id.okText);
+                            LinearLayout layout = dialog.findViewById(R.id.okLinear);
+                            layout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    //layout.setBackgroundColor(Color.parseColor(String.valueOf(R.color.mybeigeblue2)));
+                                    Intent intent = new Intent(UserRoute_GPSActivity.this, admin_or_busdriver.class);
+                                    startActivity(intent);
+                                    dialog.dismiss();
+                                }
+                            });
+                        }*/
                     }
 
                     //check();
