@@ -18,6 +18,20 @@
         android:theme="@style/Theme.System_For_Safe_Road"
         tools:targetApi="31">
         <activity
+            android:name=".busReport"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CctvActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ClassificationActicity"
             android:exported="false">
             <meta-data

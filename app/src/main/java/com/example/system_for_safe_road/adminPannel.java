@@ -30,6 +30,8 @@ public class adminPannel extends AppCompatActivity {
         preset1();
         preset2();
         preset3();
+        preset4();
+        preset5();
 
 
         Button button = findViewById(R.id.confirm_button2);
@@ -65,11 +67,23 @@ public class adminPannel extends AppCompatActivity {
                         Intent intent = new Intent(adminPannel.this, All_Routes_Activity.class);
                         startActivity(intent);
                     }
+                    else if(index == 5)
+                    {
+                        Intent intent = new Intent(adminPannel.this, CctvActivity.class);
+                        startActivity(intent);
+                    }
+                    else if(index == 6)
+                    {
+                        Intent intent = new Intent(adminPannel.this, busReport.class);
+                        startActivity(intent);
+                    }
+                    finish();
                 }
 
             }
         });
     }
+
 
 
 
@@ -112,6 +126,20 @@ public class adminPannel extends AppCompatActivity {
                         {
                             l.setBackgroundColor(Color.parseColor("#05a85c"));
                             LinearLayout l1=findViewById(R.id.viewAllRoute);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 1;
+                        }
+                        else if(index == 5)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.securitycam);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 1;
+                        }
+                        else if(index == 6)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.report);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 1;
                         }
@@ -163,6 +191,20 @@ public class adminPannel extends AppCompatActivity {
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 2;
                         }
+                        else if(index == 5)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.securitycam);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 2;
+                        }
+                        else if(index == 6)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.report);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 2;
+                        }
                     }
 
                 }
@@ -208,6 +250,20 @@ public class adminPannel extends AppCompatActivity {
                         {
                             l.setBackgroundColor(Color.parseColor("#05a85c"));
                             LinearLayout l1=findViewById(R.id.viewAllRoute);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 3;
+                        }
+                        else if(index == 5)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.securitycam);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 3;
+                        }
+                        else if(index == 6)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.report);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 3;
                         }
@@ -260,11 +316,155 @@ public class adminPannel extends AppCompatActivity {
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 4;
                         }
+                        else if(index == 5)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.securitycam);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 4;
+                        }
+                        else if(index == 6)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.report);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 5;
+                        }
                     }
 
                 }
             }
         });
+    }
+    private void preset4() {
+
+        LinearLayout l=findViewById(R.id.securitycam);
+        l.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(selected==0) {
+                    l.setBackgroundColor(Color.parseColor("#05a85c"));
+                    Button button = findViewById(R.id.confirm_button2);
+                    button.setVisibility(View.VISIBLE);
+                    selected=1;
+                    index=5;
+                }
+                else{
+                    if(index==5) {
+                        l.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        Button button = findViewById(R.id.confirm_button2);
+                        button.setVisibility(View.GONE);
+                        selected = 0;
+                        index = -1;
+                    }
+                    else{
+                        if(index==1)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.routeSelect);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 5;
+                        }
+                        else if(index==2)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.addNew);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 5;
+                        }
+                        else if(index == 3)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.track);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 5;
+                        }
+                        else if(index == 4)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.viewAllRoute);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 5;
+                        }
+                        else if(index == 6)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.report);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 5;
+                        }
+
+                    }
+
+                }
+            }
+        });
+
+    }
+    private void preset5() {
+
+        LinearLayout l=findViewById(R.id.report);
+        l.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(selected==0) {
+                    l.setBackgroundColor(Color.parseColor("#05a85c"));
+                    Button button = findViewById(R.id.confirm_button2);
+                    button.setVisibility(View.VISIBLE);
+                    selected=1;
+                    index=6;
+                }
+                else{
+                    if(index==6) {
+                        l.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        Button button = findViewById(R.id.confirm_button2);
+                        button.setVisibility(View.GONE);
+                        selected = 0;
+                        index = -1;
+                    }
+                    else{
+                        if(index==1)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.routeSelect);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 6;
+                        }
+                        else if(index==2)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.addNew);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 6;
+                        }
+                        else if(index == 3)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.track);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index =6;
+                        }
+                        else if(index == 4)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.viewAllRoute);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 6;
+                        }
+                        else if(index == 5)
+                        {
+                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            LinearLayout l1=findViewById(R.id.securitycam);
+                            l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            index = 6;
+                        }
+
+                    }
+
+                }
+            }
+        });
+
     }
 
 

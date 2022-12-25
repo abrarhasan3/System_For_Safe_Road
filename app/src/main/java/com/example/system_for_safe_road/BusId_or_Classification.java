@@ -1,9 +1,12 @@
 package com.example.system_for_safe_road;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -16,6 +19,9 @@ public class BusId_or_Classification extends AppCompatActivity {
         setContentView(R.layout.activity_bus_id_or_classification);
         classify=findViewById(R.id.classify);
         busid= findViewById(R.id.busidfornext);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         preset();
     }
@@ -37,5 +43,16 @@ public class BusId_or_Classification extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(BusId_or_Classification.this, admin_or_busdriver.class);
+                startActivity(intent);
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

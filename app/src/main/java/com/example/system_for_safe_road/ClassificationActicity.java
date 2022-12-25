@@ -1,6 +1,8 @@
 package com.example.system_for_safe_road;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -13,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,7 +36,7 @@ public class ClassificationActicity extends AppCompatActivity {
     ImageView imageView;
     TextView result;
     int imageSize = 30;
-    int i,j=10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,9 @@ public class ClassificationActicity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
 
         preset();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
     }
@@ -195,5 +201,16 @@ public class ClassificationActicity extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(ClassificationActicity.this, BusId_or_Classification.class);
+                startActivity(intent);
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
