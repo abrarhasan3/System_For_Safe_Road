@@ -124,7 +124,7 @@
             android:name=".SetFlag_SetRoute"
             android:exported="false"
             android:label="@string/title_activity_set_flag_set_route"
-            android:parentActivityName=".AdminRouteSelectionActivity" />
+            android:parentActivityName=".adminPannel" />
         <activity
             android:name=".AdminRouteSelectionActivity"
             android:exported="true"

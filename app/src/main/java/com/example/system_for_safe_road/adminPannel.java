@@ -93,7 +93,7 @@ public class adminPannel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(selected==0) {
-                    l.setBackgroundColor(Color.parseColor("#05a85c"));
+                    l.setBackgroundColor(Color.parseColor("#81C6E8"));
                     Button button = findViewById(R.id.confirm_button2);
                     button.setVisibility(View.VISIBLE);
                     selected=1;
@@ -110,35 +110,35 @@ public class adminPannel extends AppCompatActivity {
                     else{
                         if(index==2)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.addNew);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 1;
                         }
                         else if(index==3)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.track);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 1;
                         }
                         else if(index==4)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.viewAllRoute);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 1;
                         }
                         else if(index == 5)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.securitycam);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 1;
                         }
                         else if(index == 6)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.report);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 1;
@@ -155,7 +155,7 @@ public class adminPannel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(selected==0) {
-                    l.setBackgroundColor(Color.parseColor("#05a85c"));
+                    l.setBackgroundColor(Color.parseColor("#81C6E8"));
                     Button button = findViewById(R.id.confirm_button2);
                     button.setVisibility(View.VISIBLE);
                     selected=1;
@@ -172,35 +172,35 @@ public class adminPannel extends AppCompatActivity {
                     else{
                         if(index==1)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.routeSelect);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 2;
                         }
                         else if(index==3)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.track);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 2;
                         }
                         else if(index==4)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.viewAllRoute);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 2;
                         }
                         else if(index == 5)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.securitycam);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 2;
                         }
                         else if(index == 6)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.report);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 2;
@@ -217,7 +217,7 @@ public class adminPannel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(selected==0) {
-                    l.setBackgroundColor(Color.parseColor("#05a85c"));
+                    l.setBackgroundColor(Color.parseColor("#81C6E8"));
                     Button button = findViewById(R.id.confirm_button2);
                     button.setVisibility(View.VISIBLE);
                     selected=1;
@@ -234,35 +234,35 @@ public class adminPannel extends AppCompatActivity {
                     else{
                         if(index==1)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.routeSelect);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 3;
                         }
                         else if(index==2)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.addNew);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 3;
                         }
                         else if(index==4)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.viewAllRoute);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 3;
                         }
                         else if(index == 5)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.securitycam);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 3;
                         }
                         else if(index == 6)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.report);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 3;
@@ -280,7 +280,7 @@ public class adminPannel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(selected==0) {
-                    l.setBackgroundColor(Color.parseColor("#05a85c"));
+                    l.setBackgroundColor(Color.parseColor("#81C6E8"));
                     Button button = findViewById(R.id.confirm_button2);
                     button.setVisibility(View.VISIBLE);
                     selected=1;
@@ -297,35 +297,35 @@ public class adminPannel extends AppCompatActivity {
                     else{
                         if(index==1)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.routeSelect);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 4;
                         }
                         else if(index==2)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.addNew);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 4;
                         }
                         else if(index == 3)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.track);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 4;
                         }
                         else if(index == 5)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.securitycam);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 4;
                         }
                         else if(index == 6)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.report);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 5;
@@ -343,7 +343,7 @@ public class adminPannel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(selected==0) {
-                    l.setBackgroundColor(Color.parseColor("#05a85c"));
+                    l.setBackgroundColor(Color.parseColor("#81C6E8"));
                     Button button = findViewById(R.id.confirm_button2);
                     button.setVisibility(View.VISIBLE);
                     selected=1;
@@ -360,35 +360,35 @@ public class adminPannel extends AppCompatActivity {
                     else{
                         if(index==1)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.routeSelect);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 5;
                         }
                         else if(index==2)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.addNew);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 5;
                         }
                         else if(index == 3)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.track);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 5;
                         }
                         else if(index == 4)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.viewAllRoute);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 5;
                         }
                         else if(index == 6)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.report);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 5;
@@ -408,7 +408,7 @@ public class adminPannel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(selected==0) {
-                    l.setBackgroundColor(Color.parseColor("#05a85c"));
+                    l.setBackgroundColor(Color.parseColor("#81C6E8"));
                     Button button = findViewById(R.id.confirm_button2);
                     button.setVisibility(View.VISIBLE);
                     selected=1;
@@ -425,35 +425,35 @@ public class adminPannel extends AppCompatActivity {
                     else{
                         if(index==1)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.routeSelect);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 6;
                         }
                         else if(index==2)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.addNew);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 6;
                         }
                         else if(index == 3)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.track);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index =6;
                         }
                         else if(index == 4)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.viewAllRoute);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 6;
                         }
                         else if(index == 5)
                         {
-                            l.setBackgroundColor(Color.parseColor("#05a85c"));
+                            l.setBackgroundColor(Color.parseColor("#81C6E8"));
                             LinearLayout l1=findViewById(R.id.securitycam);
                             l1.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             index = 6;

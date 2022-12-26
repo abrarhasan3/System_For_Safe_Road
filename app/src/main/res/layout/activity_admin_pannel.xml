@@ -51,7 +51,7 @@
                 android:layout_gravity="center">
                 <ImageView
                     android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_height="95dp"
                     android:padding="10dp"
                     android:src="@drawable/route"
                     />
@@ -74,6 +74,7 @@
             android:layout_column="1"
             android:layout_row="0"
             android:layout_columnWeight="1"
+            android:layout_marginRight="20dp"
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
@@ -82,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="13dp"
+                android:padding="15dp"
                 android:id="@+id/addNew"
                 android:layout_gravity="center">
                 <ImageView
@@ -123,7 +124,7 @@
                 android:layout_gravity="center">
                 <ImageView
                     android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_height="110dp"
                     android:padding="10dp"
                     android:src="@drawable/t2"
                     />
@@ -201,7 +202,7 @@
                 android:layout_gravity="center">
                 <ImageView
                     android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_height="110dp"
                     android:padding="10dp"
                     android:src="@drawable/cctv"
                     />
@@ -267,7 +268,7 @@
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
         android:visibility="gone"
-        android:backgroundTint="#11c26d"
+        android:backgroundTint="#81C6E8"
         android:text="CONFIRM"
 
         android:id="@+id/confirm_button2"
