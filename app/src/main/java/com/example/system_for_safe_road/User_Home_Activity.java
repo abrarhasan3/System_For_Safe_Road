@@ -25,7 +25,7 @@ public class User_Home_Activity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference().child("users");
-    TextView routeidview, busidview;
+    TextView routeidview, busidview, time, logoutView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +36,13 @@ public class User_Home_Activity extends AppCompatActivity {
         busid = getIntent().getStringExtra("busid");
         routeId=getIntent().getStringExtra("route");
         startTime=getIntent().getStringExtra("startTime");
+        time = findViewById(R.id.starttime);
+        logoutView = findViewById(R.id.logout);
         routeidview = findViewById(R.id.drawerRouteId);
         busidview = findViewById(R.id.drawerBusId);
         routeidview.setText(routeId);
         busidview.setText(busid);
+        time.setText(startTime);
 
         drawerLayout = findViewById(R.id.drawerLayout2);
         findViewById(R.id.user_menu2).setOnClickListener(new View.OnClickListener() {
@@ -48,8 +51,13 @@ public class User_Home_Activity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-
-
+        logoutView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(User_Home_Activity.this, admin_or_busdriver.class);
+                startActivity(intent);
+            }
+        });
 
         layout.setOnClickListener(new View.OnClickListener() {
             @Override

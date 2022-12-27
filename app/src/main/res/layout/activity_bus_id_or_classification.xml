@@ -80,7 +80,7 @@
                 android:layout_gravity="center">
                 <ImageView
                     android:layout_width="90dp"
-                    android:layout_height="102dp"
+                    android:layout_height="116dp"
                     android:padding="8dp"
                     android:src="@drawable/ic_baseline_directions_bus_24"/>
                 <TextView

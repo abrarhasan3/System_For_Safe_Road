@@ -40,27 +40,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Please Enter Your Trip ID"
-            android:layout_above="@+id/busIdEdit"
+            android:layout_above="@+id/textField"
             android:layout_centerHorizontal="true"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             />
 
-        <EditText
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/busIdEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="ID"
             tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="305dp" />
+            tools:layout_editor_absoluteY="305dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Select bus id"
+            android:textColorHint="@color/mybeigeblue"
+            style="@style/MyTextInputLayout"
+            app:endIconTint="@color/mybeigeblue"
+            android:id="@+id/textField">
+            <AutoCompleteTextView
+                android:id="@+id/bus_id_on_route"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/confirm_button1"
-            android:layout_below="@+id/busIdEdit"
+            android:layout_below="@+id/textField"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:layout_width="wrap_content"
