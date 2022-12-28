@@ -3,6 +3,7 @@ package com.example.system_for_safe_road;
 import static android.provider.Contacts.SettingsColumns.KEY;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -14,6 +15,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -72,6 +74,8 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_edit_route_admin);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         flags = new ArrayList<>();
         flag_hash = new HashMap<>();
@@ -478,10 +482,16 @@ public class Track_Edit_Route_Admin extends AppCompatActivity implements OnMapRe
             }
         });
 
-
-
-
-
-
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(Track_Edit_Route_Admin.this, adminPannel.class);
+                startActivity(intent);
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

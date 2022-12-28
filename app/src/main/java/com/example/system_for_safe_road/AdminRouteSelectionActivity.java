@@ -1,9 +1,12 @@
 package com.example.system_for_safe_road;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,15 +24,13 @@ public class AdminRouteSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_route_selection);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         SourceInputEditText=findViewById(R.id.source_text);
         DestinationInputEditText=findViewById(R.id.destination_text);
 
         Enter=findViewById(R.id.route_accept);
-
-        /*SourceString=SourceInputEditText.getEditableText().toString();
-        DestinationString=DestinationInputEditText.getText().toString();*/
 
         SourceLayout=findViewById(R.id.source_layout);
         DestinationLayout=findViewById(R.id.destination_layout);
@@ -58,5 +59,16 @@ public class AdminRouteSelectionActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(AdminRouteSelectionActivity.this, adminPannel.class);
+                startActivity(intent);
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

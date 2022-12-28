@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -65,11 +66,6 @@ public class Admin_Add_Trip extends AppCompatActivity {
                     //Toast.makeText(Admin_Add_Trip.this, ""+s, Toast.LENGTH_SHORT).show();
                     stringList.add(s);
                 }
-                /*strings = new String[stringList.size()];
-                for(int i=0; i<stringList.size(); i++){
-                    strings[i] = stringList.get(i);
-                    Toast.makeText(Admin_Add_Trip.this, ""+strings[i], Toast.LENGTH_SHORT).show();
-                }*/
             }
 
             @Override
@@ -81,13 +77,6 @@ public class Admin_Add_Trip extends AppCompatActivity {
         autoCompleteTextView = findViewById(R.id.auto_complete_txt);
         arrayAdapter = new ArrayAdapter<>(Admin_Add_Trip.this, R.layout.route_list, stringList);
         autoCompleteTextView.setAdapter(arrayAdapter);
-        /*autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String routeNum = parent.getItemAtPosition(position).toString();
-                Toast.makeText(Admin_Add_Trip.this, ""+routeNum, Toast.LENGTH_SHORT).show();
-            }
-        });*/
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -134,5 +123,16 @@ public class Admin_Add_Trip extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(Admin_Add_Trip.this, adminPannel.class);
+                startActivity(intent);
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

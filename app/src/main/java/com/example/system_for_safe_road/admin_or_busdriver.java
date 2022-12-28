@@ -57,14 +57,11 @@ public class admin_or_busdriver extends AppCompatActivity {
                 });
                 alertDialog.show();
 
-                //Toast.makeText(admin_or_busdriver.this,"HI",Toast.LENGTH_SHORT).show();
             }
         });
         layout2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(admin_or_busdriver.this,bus_id_page.class);
-
                 Intent intent = new Intent(admin_or_busdriver.this,BusId_or_Classification.class);
                 startActivity(intent);
                 finish();
