@@ -79,13 +79,7 @@ public class bus_id_page extends AppCompatActivity {
         busBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //String busId = bus.getText().toString();
                 Intent intent = new Intent(bus_id_page.this, User_Home_Activity.class);
-                /*String ts = "Please wait";
-                Toast toast = Toast.makeText(getApplicationContext(), ts, Toast.LENGTH_SHORT);
-                View toastView = toast.getView();
-                toastView.setBackgroundResource(R.color.mybeigeblue2);
-                toast.show();*/
                 DatabaseReference databaseReference1 = databaseReference.child("trips").child("routeID").child(busIdString);
                 databaseReference1.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -114,9 +108,6 @@ public class bus_id_page extends AppCompatActivity {
 
                     }
                 });
-                /*Intent intent = new Intent(bus_id_page.this, User_Home_Activity.class);
-                intent.putExtra("busid", busId);
-                startActivity(intent);*/
 
             }
         });

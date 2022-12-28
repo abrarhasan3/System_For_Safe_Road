@@ -3,8 +3,10 @@ package com.example.system_for_safe_road;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -59,9 +61,11 @@ public class Bus_Tracking_Map_Activity extends FragmentActivity implements OnMap
         binding = ActivityBusTrackingMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
 
 
         polylines = new ArrayList<>();

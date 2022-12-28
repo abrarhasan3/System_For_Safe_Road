@@ -61,8 +61,10 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
     private GoogleMap mMap;
     private ActivityUserRouteGpsactivityBinding binding;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    DatabaseReference trackingBusReference = firebaseDatabase.getReference().child("users").child("track");
-    DatabaseReference databaseReference2 =  firebaseDatabase.getReference().child("users"), databaseReference;
+    DatabaseReference trackingBusReference = firebaseDatabase
+            .getReference().child("users").child("track");
+    DatabaseReference databaseReference2 =  firebaseDatabase
+            .getReference().child("users"), databaseReference;
     int i=0, count, j=0, checkLag=0;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.purple_700};
@@ -120,26 +122,6 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                 {Manifest.permission.ACCESS_FINE_LOCATION},  PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]
                 {Manifest.permission.ACCESS_COARSE_LOCATION},  PackageManager.PERMISSION_GRANTED);
-
-
-
-        /*final Handler handler = new Handler();
-        Timer timer = new Timer();
-        TimerTask doAsynchronousTask = new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        try {
-                            //your method here
-                            check();
-                        } catch (Exception e) {
-                        }
-                    }
-                });
-            }
-        };
-        timer.schedule(doAsynchronousTask, 0, 60000);*/
 
     }
 
@@ -269,7 +251,7 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tempL1_schedule, 15));
                                     int m= Integer.parseInt(i.getKey());
                                     if((myfollowingFlag-1)==m){
-                                        Toast.makeText(UserRoute_GPSActivity.this, "last", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(UserRoute_GPSActivity.this, "last", Toast.LENGTH_SHORT).show();
                                         tempL1 = tempL1_schedule;
                                     }
                                    // Toast.makeText(UserRoute_GPSActivity.this, ""+i.getKey(), Toast.LENGTH_SHORT).show();
@@ -283,17 +265,15 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                         }
                     });
                     databaseReference2.child("bus_locations").child(busid).setValue(tempL);
-                    /*if(tempM!=null)
-                    {
-                        tempM.remove();
-                    }*/
                     Date date = Calendar.getInstance().getTime();
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
                     String time = simpleDateFormat.format(date);
                     tempM = mMap.addMarker(new MarkerOptions().position(tempL)
                             .title(busid+"-"+time)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-                    databaseReference2.child("bus_locations").child(busid).child("time").setValue(time);
+                            .icon(BitmapDescriptorFactory
+                                    .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                    databaseReference2.child("bus_locations")
+                            .child(busid).child("time").setValue(time);
                     hashMap.put(tempL1, tempL);
                     col=1;
                     //getRoute(tempL1, tempL);
@@ -356,18 +336,16 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                                         = (difference
                                         / (1000 * 60 * 60))
                                         % 24;
-                                //int total_difference = difference_In_Hours*60 + difference_In_Minutes;
-                                //long differenceDates = difference / (24 * 60 * 60 * 1000);
-                                //String dayDifference = Long.toString(differenceDates);
-                                //int diff = timeDifference(time, time1);
-                                Toast.makeText(UserRoute_GPSActivity.this, "d"+distance, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(UserRoute_GPSActivity.this, "d"+distance, Toast.LENGTH_SHORT).show();
                                 String flag = String.valueOf(flagInt);
                                 mMap.addMarker(new MarkerOptions().position(tempL)
                                         .title(busid+": "+timeCurrent)
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-                                trackingBusReference.child("reaching_schedule").child("Flag"+flag).child("reaching_time").setValue(time);
+                                trackingBusReference.child("reaching_schedule")
+                                        .child("Flag"+flag).child("reaching_time").setValue(time);
                                 //trackingBusReference.child("Flag"+flag).child("time_difference").setValue(String.valueOf(time2+" "+timeCurrent));
-                                trackingBusReference.child("reaching_schedule").child("Flag"+flag).child("time_difference")
+                                trackingBusReference.child("reaching_schedule")
+                                        .child("Flag"+flag).child("time_difference")
                                         .setValue(String.valueOf(difference_In_Hours*60 + difference_In_Minutes));
 
                                 trackingBusReference.child("Flag"+flag).child("time_difference")
@@ -377,42 +355,8 @@ public class UserRoute_GPSActivity extends AppCompatActivity implements OnMapRea
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
-                            /*if(flatToCheckL.equals(destinationL)){
-                            Toast.makeText(UserRoute_GPSActivity.this, "Reached", Toast.LENGTH_SHORT).show();
-                            Dialog dialog = new Dialog(UserRoute_GPSActivity.this);
-                            dialog.setContentView(R.layout.upon_reaching_destination);
-                            dialog.show();
-                            TextView textView = dialog.findViewById(R.id.okText);
-                            LinearLayout layout = dialog.findViewById(R.id.okLinear);
-                            layout.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    //layout.setBackgroundColor(Color.parseColor(String.valueOf(R.color.mybeigeblue2)));
-                                    Intent intent = new Intent(UserRoute_GPSActivity.this, admin_or_busdriver.class);
-                                    startActivity(intent);
-                                    dialog.dismiss();
-                                }
-                            });
-                        }*/
 
                         }
-                        /*if(flatToCheckL.equals(destinationL)){
-                            Toast.makeText(UserRoute_GPSActivity.this, "Reached", Toast.LENGTH_SHORT).show();
-                            Dialog dialog = new Dialog(UserRoute_GPSActivity.this);
-                            dialog.setContentView(R.layout.upon_reaching_destination);
-                            dialog.show();
-                            TextView textView = dialog.findViewById(R.id.okText);
-                            LinearLayout layout = dialog.findViewById(R.id.okLinear);
-                            layout.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    //layout.setBackgroundColor(Color.parseColor(String.valueOf(R.color.mybeigeblue2)));
-                                    Intent intent = new Intent(UserRoute_GPSActivity.this, admin_or_busdriver.class);
-                                    startActivity(intent);
-                                    dialog.dismiss();
-                                }
-                            });
-                        }*/
                     }
 
                     //check();
