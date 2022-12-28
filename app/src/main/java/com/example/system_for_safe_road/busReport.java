@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -70,46 +71,60 @@ public class busReport extends AppCompatActivity {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String routeId = snapshot.child("trips").child("routeID").child(busID).getValue().toString();
-
-                for(DataSnapshot dataSnapshot : snapshot.child("routes").child(routeId).child("Flag").getChildren())
+                if(snapshot.child("trips").child("routeID").hasChild(busID) == false)
                 {
+                    AlertDialog.Builder alertDialog1= new AlertDialog.Builder(busReport.this);
+                    alertDialog1.setTitle("No data found! Sorry!");
+                    alertDialog1.setPositiveButton("Search Again", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            createAlertD();
 
-                    flag = dataSnapshot.getKey();
-                    atime = dataSnapshot.child("time").getValue().toString();
-                    if(snapshot.child("track").child(busID).child(routeId).child("reaching_schedule").hasChild(flag))
-                    {
-                        rTime = snapshot.child("track").child(busID).child(routeId).child("reaching_schedule").child(flag).child("reaching_time").getValue().toString();
-                        String delayT = snapshot.child("track").child(busID).child(routeId).child("reaching_schedule").child(flag).child("time_difference").getValue().toString();
-                        if(delayT.charAt(0) == '-')
-                        {
-                            delay = "No Delay";
-                            isDelay = 0;
                         }
-                        else
-                        {
-
-                            delay = delayT.substring(1,delayT.length());
-                            isDelay = 1;
+                    });
+                    alertDialog1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
                         }
-                    }
-                    else
-                    {
-                        rTime = "NOT YET REACHED";
-                        delay = "Not Available";
-
-                    }
-                    initData();
+                    });
+                    alertDialog1.show();
 
                 }
+                else {
+                    String routeId = snapshot.child("trips").child("routeID").child(busID).getValue().toString();
+
+                    for (DataSnapshot dataSnapshot : snapshot.child("routes").child(routeId).child("Flag").getChildren()) {
+
+                        flag = dataSnapshot.getKey();
+                        atime = dataSnapshot.child("time").getValue().toString();
+                        if (snapshot.child("track").child(busID).child(routeId).child("reaching_schedule").hasChild(flag)) {
+                            rTime = snapshot.child("track").child(busID).child(routeId).child("reaching_schedule").child(flag).child("reaching_time").getValue().toString();
+                            String delayT = snapshot.child("track").child(busID).child(routeId).child("reaching_schedule").child(flag).child("time_difference").getValue().toString();
+                            if (delayT.charAt(0) == '-') {
+                                delay = "No Delay";
+                                isDelay = 0;
+                            } else {
+
+                                delay = delayT +" Minute";
+                                isDelay = 1;
+                            }
+                        } else {
+                            rTime = "NOT YET REACHED";
+                            delay = "Not Available";
+                        }
+                        initData();
+
+                    }
 
 
-
-                initRecyclerView();
+                    initRecyclerView();
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(busReport.this, ""+error, Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -5,11 +5,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/rrre"
 
         android:layout_height="wrap_content">
         <TextView
             android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="Flag No"
             android:textColor="@color/black"
@@ -19,18 +20,19 @@
             android:layout_marginRight="10dp"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="ACCTUAL TIME"
+            android:text="ACCTUAL T"
             android:id="@+id/actualtime"
             android:textColor="@color/black"
             android:textSize="15sp"
+            android:textAlignment="center"
             android:layout_toRightOf="@id/flagNo"
             android:layout_marginRight="10dp"
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="Total Delay"
             android:layout_toRightOf="@id/actualtime"
@@ -40,9 +42,10 @@
             android:layout_marginRight="10dp"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="Total Delay"
+            android:textAlignment="center"
             android:layout_toRightOf="@id/reached_time"
             android:id="@+id/totaldelay"
             android:textSize="15sp"
@@ -60,5 +63,11 @@
 
             />
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/vv1"
+        android:layout_below="@+id/rrre"
+        android:background="@android:color/darker_gray" />
 
 </RelativeLayout>
