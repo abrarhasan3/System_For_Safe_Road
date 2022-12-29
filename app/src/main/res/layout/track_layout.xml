@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="8dp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp">
+            <TableRow
+                android:background="@color/mybeigeblue">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Bus ID"
+                    android:textColor="@color/white"
+                    android:padding="10sp"
+                    android:textSize="14sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Departure Place"
+                    android:textColor="@color/white"
+                    android:padding="10sp"
+                    android:textSize="14sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Journey Date"
+                    android:textColor="@color/white"
+                    android:padding="10sp"
+                    android:textSize="14sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Departure Time"
+                    android:textColor="@color/white"
+                    android:padding="10sp"
+                    android:textSize="14sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Flag Points"
+                    android:textColor="@color/white"
+                    android:padding="10sp"
+                    android:textSize="14sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Status"
+                    android:textColor="@color/white"
+                    android:padding="10sp"
+                    android:textSize="14sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Delay of"
+                    android:textColor="@color/white"
+                    android:padding="10sp"
+                    android:textSize="14sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/bus_id1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:id="@+id/departure_place1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+
+                    />
+
+                <TextView
+                    android:id="@+id/journey_date1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:id="@+id/departure_time1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/flag_point1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Noapara"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/status1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Reached"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/delay1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="No delay"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/bus_id2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:id="@+id/departure_place2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+
+                    />
+
+                <TextView
+                    android:id="@+id/journey_date2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="3"
+                    android:padding="10sp"
+
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/departure_time2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/flag_point2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="4"
+                    android:padding="10sp"
+                    android:text="Jessore"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/status2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Reached"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/delay2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="10 min"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/bus_id3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="540732"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:id="@+id/departure_place3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Shonadanga"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/journey_date3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="11 November, 2022"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:id="@+id/departure_time3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="2:30 pm"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/flag_point3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Khagrachori"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/status3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Haven't reached"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/delay3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/bus_id4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:id="@+id/departure_place4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+
+                    />
+
+                <TextView
+                    android:id="@+id/journey_date4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:id="@+id/departure_time4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/flag_point4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Pabna"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/status4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Haven't reached"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/delay4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/bus_id5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:id="@+id/departure_place5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+
+                    />
+
+                <TextView
+                    android:id="@+id/journey_date5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:id="@+id/departure_time5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/flag_point5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Dhaka"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/status5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Haven't reached"
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/delay5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:padding="10sp"
+                    android:textSize="12sp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Safe Journey</string>
+    <string name="title_activity_set_flag_set_route">SetFlag_SetRoute</string>
+    <string name="title_activity_driver_route_gps">DriverRoute_GPS</string>
+    <string name="title_activity_user_route_gpsactivity">UserRoute_GPSActivity</string>
+    <string name="title_activity_bus_tracking_map">Bus_Tracking_Map_Activity</string>
+</resources>
