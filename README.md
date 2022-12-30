@@ -54,3 +54,10 @@ This Project is about ensuring safety on road. The project is devided into two p
       
       ![Screenshot_20221227-012107](https://user-images.githubusercontent.com/85815740/210075416-19d4ee6b-2c01-419d-a199-59119885824f.jpg)
 
+## Authors
+
+- [Abrar Hasan](https://github.com/abrarhasan3)
+- [Nishat Sadaf Lira](https://github.com/Lira1999)
+
+
+
