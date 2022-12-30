@@ -44,8 +44,13 @@ This Project is about ensuring safety on road. The project is devided into two p
 
 # Screenshot of Application:
    ### Traffic Sign Detection:
+   ![download](https://user-images.githubusercontent.com/85815740/210075189-e6651464-aec9-4775-826e-6c39f96fd69d.png)
+
    
    ## Screenshot of Android Application:
-      Splash Screen
-
+      Splash Screen:
       
+      ![Screenshot_20221227-012103](https://user-images.githubusercontent.com/85815740/210075400-        1c189519-3a4e-4765-b144-ee7a6a52304d.jpg)
+      
+      ![Screenshot_20221227-012107](https://user-images.githubusercontent.com/85815740/210075416-19d4ee6b-2c01-419d-a199-59119885824f.jpg)
+
