@@ -6,7 +6,7 @@ This Project is about ensuring safety on road. The project is devided into two p
     1. Ensuing Assistance of the Driver
     2. Fully Monitoring of the vechile.
 
-## Ensuing Driver Assistance: 
+### Ensuing Driver Assistance: 
     We would like to detect the traffic sign by a trained Machine Learing model and alert the driver before 
     reaching near the traffic sign.
     Here YOLOv4 model is used to detect this. 
@@ -18,7 +18,7 @@ This Project is about ensuring safety on road. The project is devided into two p
         3. Danger
         4. Other
 
-## Monitoring of vechile:
+### Monitoring of vechile:
     This is done with an android app which would be used to track the buses
     current location.
     The application provides some more exiting feature for the admin pannel like:
@@ -28,5 +28,24 @@ This Project is about ensuring safety on road. The project is devided into two p
         3. Editing or Deleting the route.
         4. Assigning a specific route to a trip.
         5. Seing the overall report of this trip (Late on the which point, Arrival Time etc).
+        
+# Flow Chart of The System
+   ### Traffic Sign Detection:
+   ![s4](https://user-images.githubusercontent.com/85815740/210074181-d962e58d-5dfb-46cb-9f63-79e6ce8bd770.jpg)
+
+   ### Admin Side of The Application:  
+   ![Slide2](https://user-images.githubusercontent.com/85815740/210074206-a0f1748c-8f6b-4b3e-81fc-42e8ae618d64.JPG)
+   ### Bus Driver Side of The Application :
+   ![Slide1](https://user-images.githubusercontent.com/85815740/210074194-66b8f572-6647-4d58-a545-ff6b5b7627a9.jpg)
+
+# Schema Diagram of the Application:
+   ![Slide3](https://user-images.githubusercontent.com/85815740/210074219-ed92ff40-c152-4e9e-b027-9f686415c441.JPG)
 
 
+# Screenshot of Application:
+   ### Traffic Sign Detection:
+   
+   ## Screenshot of Android Application:
+      Splash Screen
+
+      
