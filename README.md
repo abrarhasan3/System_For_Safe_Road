@@ -7,7 +7,8 @@ This Project is about ensuring safety on road. The project is devided into two p
     2. Fully Monitoring of the vechile.
 
 ## Ensuing Driver Assistance: 
-    We would like to detect the traffic sign by a trained Machine Learing model and alert the driver before reaching near the traffic sign.
+    We would like to detect the traffic sign by a trained Machine Learing model and alert the driver before 
+    reaching near the traffic sign.
     Here YOLOv4 model is used to detect this. 
     # The ipynb file contains the code for this.
     Currently this model can detect only 4 sign. 
@@ -18,7 +19,8 @@ This Project is about ensuring safety on road. The project is devided into two p
         4. Other
 
 ## Monitoring of vechile:
-    This is done with an android app which would be used to track the buses current location.
+    This is done with an android app which would be used to track the buses
+    current location.
     The application provides some more exiting feature for the admin pannel like:
         
         1. Designing a route from google maps.
