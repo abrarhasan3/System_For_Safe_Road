@@ -48,9 +48,37 @@ This Project is about ensuring safety on road. The project is devided into two p
 
    
    ## Screenshot of Android Application:
-      Splash Screen:
-      
-     ![Screenshot_20221227-012103](https://user-images.githubusercontent.com/85815740/210175647-3410debe-4f39-4f4c-8cae-72f46a9fb14c.jpg)
+   
+   <table>
+   <tr>
+    <td colspan = 2 align="center"><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Common/Screenshot_20221227-012103.jpg" height="400" width="200"> </td>
+    <td colspan = 2 align="center">
+      <img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Common/Screenshot_20221227-012107.jpg" height="400" width="200"> 
+      </td>
+   </tr>
+   <tr> 
+      <td colspan = 2 align = "center" >Splash Screen</td>
+      <td colspan = 2 align = "center" > Choosing Account Type</td>
+   </tr>
+   <tr>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012647.jpg" height="400" width="200"> </td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012651.jpg" height="400" width="200"></td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012658.jpg" height="400" width="200"></td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012703.jpg" height="400" width="200"></td>
+    
+   </tr>
+   <tr> 
+      <td align = "center" >Choose The Activity</td>
+      <td align = "center" > Page for Detecting Traffic Sign</td>
+      <td align = "center" >Page for Bus Drive Action</td>
+      <td align = "center" > Stating Journey</td>
+   </tr>
+  
+   
+</table>
+   
+   
+
 
 
 ## Authors
