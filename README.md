@@ -61,6 +61,9 @@ This Project is about ensuring safety on road. The project is devided into two p
       <td colspan = 2 align = "center" > Choosing Account Type</td>
    </tr>
    <tr>
+      <td colspan = 4 align="center"> <b> BUS DRIVER SIDE</b> </td>
+   </tr>
+   <tr>
     <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012647.jpg" height="400" width="200"> </td>
     <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012651.jpg" height="400" width="200"></td>
     <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012658.jpg" height="400" width="200"></td>
@@ -84,19 +87,60 @@ This Project is about ensuring safety on road. The project is devided into two p
       <td align = "center" > Route Traveled By the bus</td>
    </tr>
    <tr>
+      <td colspan = 4 align="center"> <b>ADMIN SIDE</b> </td>
+   </tr>
+   <tr>
     <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-012111.jpg" height="400" width="200"> </td>
     <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/66fe152a0b5558e561b78a35dc4bd49f27575b9d/image/Admin/Screenshot_20221227-012122.jpg" height="400" width="200"></td>
     <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/66fe152a0b5558e561b78a35dc4bd49f27575b9d/image/Admin/Screenshot_20221227-012128.jpg" height="400" width="200"></td>
-    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012703.jpg" height="400" width="200"></td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-012144.jpg" height="400" width="200"></td>
    </tr>
+    
    <tr> 
       <td align = "center" >Admin Password Dialog</td>
       <td align = "center" > Admin Pannel </td>
-      <td align = "center" >Page for Bus Drive Action</td>
-      <td align = "center" > Stating Journey</td>
+      <td align = "center" >Choosing Select Route</td>
+      <td align = "center" >Entering Source Destination and ID</td>
    </tr>
-  
    
+   <tr>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-012221.jpg" height="400" width="200"> </td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-012244.jpg" height="400" width="200"></td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-012317.jpg" height="400" width="200"></td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-012346.jpg" height="400" width="200"></td>
+   </tr>
+   <tr> 
+      <td align = "center" >Setting The Flags</td>
+      <td align = "center" > Reached The Destination</td>
+      <td align = "center" >Add New Journey</td>
+      <td align = "center" >Entered Infromation for Trip</td>
+   </tr>
+   
+   <tr>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-012414.jpg" height="400" width="200"> </td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-012435.jpg" height="400" width="200"></td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-012627.jpg" height="400" width="200"></td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20230101-235120.png" height="400" width="200"></td>
+   </tr>
+   <tr> 
+      <td align = "center" >Selecting The bus ID</td>
+      <td align = "center" > Tracking The bus </td>
+      <td align = "center" >Getting Bus Id for Report </td>
+      <td align = "center" >Report of The trip</td>
+   </tr>
+   
+   <tr>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-234030.jpg" height="400" width="200"> </td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-234750(1).jpg" height="400" width="200"></td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221227-234829.jpg" height="400" width="200"></td>
+    <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Admin/Screenshot_20221228-000322.jpg" height="400" width="200"></td>
+   </tr>
+   <tr> 
+      <td align = "center" >Editing The Route</td>
+      <td align = "center" > Edit Options </td>
+      <td align = "center" >Searching For Specific Location</td>
+      <td align = "center" >Setting The Timer</td>
+   </tr>
 </table>
    
    
