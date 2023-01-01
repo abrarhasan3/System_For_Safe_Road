@@ -73,6 +73,16 @@ This Project is about ensuring safety on road. The project is devided into two p
       <td align = "center" >Page for Bus Drive Action</td>
       <td align = "center" > Stating Journey</td>
    </tr>
+   <tr>
+    <td align="center"><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012705.jpg" height="400" width="200"> </td>
+    <td align="center">
+      <img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012750.jpg" height="400" width="200"> 
+      </td>
+   </tr>
+   <tr> 
+      <td align = "center" >Navigation Drawer </td>
+      <td align = "center" > Route Traveled By the bus</td>
+   </tr>
   
    
 </table>
