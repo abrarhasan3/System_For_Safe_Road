@@ -68,7 +68,8 @@ This Project is about ensuring safety on road. The project is devided into two p
     <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012651.jpg" height="400" width="200"></td>
     <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012658.jpg" height="400" width="200"></td>
     <td><img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012703.jpg" height="400" width="200"></td>
-    
+   
+
    </tr>
    <tr> 
       <td align = "center" >Choose The Activity</td>
@@ -81,10 +82,12 @@ This Project is about ensuring safety on road. The project is devided into two p
     <td align="center">
       <img src="https://github.com/abrarhasan3/System_For_Safe_Road/blob/main/image/Bus%20Driver/Screenshot_20221227-012750.jpg" height="400" width="200"> 
       </td>
+       <td><img src="https://user-images.githubusercontent.com/85815740/213969158-668a6716-6a2a-43ad-a21d-828de2849b9b.png" height="400" width="200"></td>
    </tr>
    <tr> 
       <td align = "center" >Navigation Drawer </td>
       <td align = "center" > Route Traveled By the bus</td>
+      <td align = "center" > Traffic Sign Detection</td>
    </tr>
    <tr>
       <td colspan = 4 align="center"> <b>ADMIN SIDE</b> </td>
